@@ -1,0 +1,69 @@
+{
+  "expo": {
+    "name": "Haarlos",
+    "slug": "almand-app",
+    "icon": "./assets/alamd.jpeg",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "sdkVersion": "54.0.0",
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Haarlos utilise le micro pour évaluer votre prononciation.",
+        "NSSpeechRecognitionUsageDescription": "Haarlos utilise la reconnaissance vocale pour corriger votre lecture."
+      }
+    },
+    "android": {
+      "package": "com.almandapp",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/alamd.jpeg",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "splash": {
+      "image": "./assets/alamd.jpeg",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "sounds": [
+            "./assets/sounds/notification.mp3"
+          ]
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow access to scan QR codes and barcodes"
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Haarlos utilise le micro pour la pratique de lecture vocale."
+        }
+      ],
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "Haarlos utilise le micro pour évaluer votre prononciation.",
+          "speechRecognitionPermission": "Haarlos utilise la reconnaissance vocale pour corriger votre lecture."
+        }
+      ],
+      "./plugins/withAndroidXManifestFix.js"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "50cd240f-bc18-424b-b3f5-3d86bdf383a6"
+      }
+    }
+  }
+}
