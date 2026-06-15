@@ -48,7 +48,7 @@ function fmtMin(m) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function PlannerScreen() {
-  const [section,      setSection]      = useState('dashboard');
+  const [section,      setSection]      = useState('tasks');
   const [tasks,        setTasks]        = useState([]);
   const [sessions,     setSessions]     = useState([]);
   const [settings,     setSettings]     = useState(DEFAULT_SETTINGS);
@@ -261,6 +261,15 @@ export default function PlannerScreen() {
   const totalSec    = secondsFor(timerType);
   const timerPct    = totalSec > 0 ? (totalSec - timeLeft) / totalSec : 0;
   const timerColors = TIMER_COLORS[timerType];
+  const completedTodayCount = todayTasks.filter(t => t.completed).length;
+  const pendingTodayCount = todayTasks.length - completedTodayCount;
+
+  const SECTION_SUBTITLE = {
+    dashboard: 'Your day at a glance',
+    tasks: 'Plan and complete today\'s tasks',
+    timer: 'Stay focused with simple sessions',
+    stats: 'Track your study consistency',
+  };
 
   // ── Dashboard ──────────────────────────────────────────────────────────────
 
@@ -404,6 +413,30 @@ export default function PlannerScreen() {
 
     return (
       <View style={{ flex: 1 }}>
+        <View style={styles.planSummaryCard}>
+          <View style={styles.planSummaryTop}>
+            <Text style={styles.planSummaryTitle}>Today</Text>
+            <TouchableOpacity style={styles.planSummaryAdd} onPress={openAdd} activeOpacity={0.75}>
+              <Ionicons name="add" size={16} color="#2563EB" />
+              <Text style={styles.planSummaryAddText}>Add task</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.planSummaryStats}>
+            <View style={styles.planStatPill}>
+              <Text style={styles.planStatValue}>{completedTodayCount}</Text>
+              <Text style={styles.planStatLabel}>Done</Text>
+            </View>
+            <View style={styles.planStatPill}>
+              <Text style={styles.planStatValue}>{pendingTodayCount}</Text>
+              <Text style={styles.planStatLabel}>Pending</Text>
+            </View>
+            <View style={styles.planStatPill}>
+              <Text style={styles.planStatValue}>{todayTasks.length}</Text>
+              <Text style={styles.planStatLabel}>Total</Text>
+            </View>
+          </View>
+        </View>
+
         {/* Filter chips */}
         <ScrollView
           horizontal
@@ -769,7 +802,10 @@ export default function PlannerScreen() {
 
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Planner</Text>
+        <View>
+          <Text style={styles.headerTitle}>Planner</Text>
+          <Text style={styles.headerSubtitle}>{SECTION_SUBTITLE[section]}</Text>
+        </View>
         {section === 'tasks' && (
           <TouchableOpacity style={styles.headerAddBtn} onPress={openAdd}>
             <Ionicons name="add" size={22} color="#6366F1" />
@@ -876,13 +912,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 8,
-    paddingBottom: 10,
+    paddingBottom: 8,
   },
   headerTitle: {
-    fontSize: 26,
-    fontWeight: '800',
+    fontSize: 24,
+    fontWeight: '700',
     color: '#1A1A2E',
-    letterSpacing: -0.3,
+    letterSpacing: -0.2,
+  },
+  headerSubtitle: {
+    fontSize: 12,
+    color: '#6B7280',
+    marginTop: 2,
   },
   headerAddBtn: {
     width: 36,
@@ -898,10 +939,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 20,
     marginBottom: 12,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#EEF2F7',
     borderRadius: 12,
     padding: 4,
-    gap: 2,
+    gap: 4,
   },
   tab: {
     flex: 1,
@@ -920,7 +961,7 @@ const styles = StyleSheet.create({
     }),
   },
   tabText: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '600',
     color: '#9CA3AF',
   },
@@ -1126,16 +1167,74 @@ const styles = StyleSheet.create({
   filterScroll: { maxHeight: 50 },
   filterContent: {
     paddingHorizontal: 20,
-    paddingVertical: 6,
+    paddingVertical: 8,
     gap: 8,
+  },
+  planSummaryCard: {
+    marginHorizontal: 20,
+    marginTop: 2,
+    marginBottom: 6,
+    borderRadius: 14,
+    padding: 12,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  planSummaryTop: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  planSummaryTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#111827',
+  },
+  planSummaryAdd: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: '#EFF6FF',
+    borderRadius: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+  },
+  planSummaryAddText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#2563EB',
+  },
+  planSummaryStats: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  planStatPill: {
+    flex: 1,
+    borderRadius: 10,
+    backgroundColor: '#F9FAFB',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    paddingVertical: 8,
+    alignItems: 'center',
+  },
+  planStatValue: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#111827',
+  },
+  planStatLabel: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#6B7280',
   },
   filterChip: {
     paddingHorizontal: 14,
-    paddingVertical: 7,
+    paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: '#F3F4F6',
-    borderWidth: 1.5,
-    borderColor: 'transparent',
+    backgroundColor: '#F9FAFB',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
   },
   filterChipActiveDefault: {
     backgroundColor: '#EEF2FF',
@@ -1144,13 +1243,13 @@ const styles = StyleSheet.create({
   filterChipText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#6B7280',
+    color: '#4B5563',
   },
   taskListPad: {
     paddingHorizontal: 20,
-    paddingTop: 8,
+    paddingTop: 10,
     paddingBottom: 80,
-    gap: 8,
+    gap: 10,
   },
   emptyState: {
     flex: 1,
@@ -1178,6 +1277,8 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 14,
     gap: 12,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
     ...Platform.select({
       ios:     { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 4 },
       android: { elevation: 1 },

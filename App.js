@@ -45,10 +45,11 @@ function handleNotificationData(data, navigationRef) {
 }
 
 // Tab navigator extracted so the Stack can reference it as a screen component
-function SpeechPracticeScreen() {
+function SpeechPracticeScreen({ route }) {
+  const initialText = route?.params?.targetText;
   return (
     <SafeAreaView style={speechStyles.safe} edges={['top', 'bottom']}>
-      <SpeechTracker targetText="بسم الله الرحمن الرحيم" />
+      <SpeechTracker initialTargetText={initialText} />
     </SafeAreaView>
   );
 }

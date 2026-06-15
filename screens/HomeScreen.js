@@ -284,20 +284,22 @@ function LearnGermanCard({ onPress }) {
 }
 
 function SpeechPracticeCard({ onPress }) {
+  const { t, isRTL } = useLanguage();
+
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9} style={sp.wrapper}>
       <LinearGradient
         colors={['#7C3AED', '#6C63FF']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={sp.card}
+        style={[sp.card, isRTL && { flexDirection: 'row-reverse' }]}
       >
         <Ionicons name="mic" size={26} color="#FFFFFF" />
         <View style={sp.content}>
-          <Text style={sp.title}>Lecture vocale</Text>
-          <Text style={sp.subtitle}>Pratiquez et corrigez votre prononciation arabe</Text>
+          <Text style={[sp.title, isRTL && { textAlign: 'right' }]}>{t('home.speechPractice')}</Text>
+          <Text style={[sp.subtitle, isRTL && { textAlign: 'right' }]}>{t('home.speechPracticeSub')}</Text>
         </View>
-        <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.9)" />
+        <Ionicons name={isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color="rgba(255,255,255,0.9)" />
       </LinearGradient>
     </TouchableOpacity>
   );

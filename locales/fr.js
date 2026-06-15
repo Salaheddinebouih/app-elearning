@@ -45,6 +45,8 @@ export default {
     startQuiz:     'Commencer le quiz',
     xpPill:        '+50 XP',
     scanQR:        'Scanner le QR Code',
+    speechPractice: 'Lecture vocale',
+    speechPracticeSub: 'Pratiquez et corrigez votre prononciation allemande',
   },
 
   learnGerman: {
@@ -93,6 +95,22 @@ export default {
     errorDelete:      'Impossible de supprimer la phrase. Réessayez.',
     listen:           'Écouter',
     playing:          'Lecture…',
+    practice:         'Pratiquer',
+  },
+
+  speechTracker: {
+    title:             'Prononciation',
+    showTranslation:   'Afficher la traduction',
+    hideTranslation:   'Masquer la traduction',
+    noSavedSentences:  'Aucune phrase enregistrée. Ajoutez-en dans l\'onglet Phrases !',
+    savedCategory:     'Enregistrées',
+    listening:         'Écoute en cours…',
+    processing:        'Analyse…',
+    pressToRead:       'Maintenir pour parler',
+    releaseToStop:     'Relâcher pour arrêter',
+    accuracy:          'Précision',
+    youSaid:           'Vous avez dit',
+    targetWords:       'Mots cibles',
   },
 
   quiz: {

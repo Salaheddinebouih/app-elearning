@@ -12,13 +12,15 @@
       "infoPlist": {
         "NSMicrophoneUsageDescription": "Haarlos utilise le micro pour évaluer votre prononciation.",
         "NSSpeechRecognitionUsageDescription": "Haarlos utilise la reconnaissance vocale pour corriger votre lecture."
-      }
+      },
+      "bundleIdentifier": "com.almandapp"
     },
     "android": {
       "package": "com.almandapp",
       "permissions": [
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/alamd.jpeg",

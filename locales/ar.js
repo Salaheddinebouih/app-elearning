@@ -45,6 +45,8 @@ export default {
     startQuiz:     'بدء الاختبار',
     xpPill:        '+50 نقطة',
     scanQR:        'مسح رمز QR',
+    speechPractice: 'ممارسة النطق',
+    speechPracticeSub: 'تدرّب وصحّح نطقك للغة الألمانية',
   },
 
   learnGerman: {
@@ -93,6 +95,22 @@ export default {
     errorDelete:      'تعذّر حذف الجملة. يرجى المحاولة مرة أخرى.',
     listen:           'استمع',
     playing:          'يشغّل…',
+    practice:         'تدرّب',
+  },
+
+  speechTracker: {
+    title:             'النطق',
+    showTranslation:   'عرض الترجمة',
+    hideTranslation:   'إخفاء الترجمة',
+    noSavedSentences:  'لا توجد جمل محفوظة بعد. أضفها في علامة تبويب الجمل!',
+    savedCategory:     'المحفوظة',
+    listening:         'جارٍ الاستماع…',
+    processing:        'جارٍ التحليل…',
+    pressToRead:       'اضغط مع الاستمرار للتحدث',
+    releaseToStop:     'اترك للتوقف',
+    accuracy:          'الدقة',
+    youSaid:           'أنت قلت',
+    targetWords:       'الكلمات المستهدفة',
   },
 
   quiz: {

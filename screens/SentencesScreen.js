@@ -150,6 +150,17 @@ export default function SentencesScreen() {
               {isPlaying ? t('sentences.playing') : t('sentences.listen')}
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.practiceBtn}
+            onPress={() => navigation.navigate('SpeechPractice', { targetText: item.sentence })}
+            activeOpacity={0.7}
+          >
+            <Ionicons name="mic-outline" size={14} color="#EC4899" />
+            <Text style={styles.practiceText}>
+              {t('sentences.practice')}
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -363,6 +374,21 @@ const styles = StyleSheet.create({
   cardActions: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 8,
+  },
+  practiceBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    backgroundColor: '#FDF2F8',
+    borderRadius: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+  },
+  practiceText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#EC4899',
   },
   listenBtn: {
     flexDirection: 'row',
