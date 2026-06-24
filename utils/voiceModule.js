@@ -19,8 +19,14 @@ if (
 }
 
 // ─── Debug logs (can be removed after confirmation) ──────────────────────────
-console.log('NativeModules.Voice  =', NativeModules?.Voice);
-console.log('NativeModules.RCTVoice =', NativeModules?.RCTVoice);
+console.log('1. NativeModules.Voice =', NativeModules?.Voice);
+console.log('2. NativeModules.RCTVoice =', NativeModules?.RCTVoice);
+console.log(
+  '3. Voice-related NativeModules =',
+  Object.keys(NativeModules || {}).filter(k => k.toLowerCase().includes('voice'))
+);
+console.log('4. Voice object from getVoiceModule() =', getVoiceModule());
+
 
 // ─── Exported helper ─────────────────────────────────────────────────────────
 
