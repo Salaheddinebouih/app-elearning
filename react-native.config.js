@@ -4,7 +4,7 @@ module.exports = {
     '@react-native-voice/voice': {
       platforms: {
         android: {
-          sourceDir: path.join(__dirname, 'node_modules', '@react-native-voice/voice', 'android'),
+          sourceDir: 'android',
           packageImportPath: 'import com.wenkesj.voice.VoicePackage;',
           packageInstance: 'new VoicePackage()',
         },
