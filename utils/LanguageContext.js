@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { I18nManager } from 'react-native';
+import { I18nManager, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import en from '../locales/en';
 import ar from '../locales/ar';
@@ -39,6 +39,10 @@ export function LanguageProvider({ children }) {
     AsyncStorage.getItem(LANG_KEY).then((saved) => {
       if (saved && TRANSLATIONS[saved]) {
         setLanguageState(saved);
+        const shouldBeRTL = saved === 'ar';
+        if (I18nManager.isRTL !== shouldBeRTL) {
+          I18nManager.forceRTL(shouldBeRTL);
+        }
       }
     });
   }, []);
@@ -47,6 +51,16 @@ export function LanguageProvider({ children }) {
     if (!TRANSLATIONS[lang]) return;
     await AsyncStorage.setItem(LANG_KEY, lang);
     setLanguageState(lang);
+
+    const isRTLNow = lang === 'ar';
+    if (I18nManager.isRTL !== isRTLNow) {
+      I18nManager.forceRTL(isRTLNow);
+      Alert.alert(
+        lang === 'ar' ? 'إعادة التشغيل مطلوبة' : 'Restart Required',
+        lang === 'ar' ? 'يرجى إغلاق التطبيق وإعادة فتحه لتطبيق اللغة بالكامل.' : 'Please completely close and reopen the app to apply the language layout.',
+        [{ text: 'OK' }]
+      );
+    }
   }, []);
 
   /**

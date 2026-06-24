@@ -1,27 +1,48 @@
-import { Platform } from 'react-native';
+import { Platform, NativeModules } from 'react-native';
 
-/**
- * Load the Voice module only if it was compiled into the binary.
- *
- * NOTE: @react-native-voice/voice registers its Android native module as
- * "RCTVoice" (see VoiceModule.java → getName()), NOT as "Voice".
- * Checking NativeModules.Voice therefore ALWAYS returns undefined, even in
- * a correctly-built APK, causing the unavailable warning to show on every
- * real device. The fix: skip the NativeModules guard and rely on try/catch.
- */
+// ─── POLYFILL — must run at module-load time, before any require() ───────────
+//
+// @react-native-voice/voice dist/index.js line 8 reads:
+//   const Voice = NativeModules.Voice;
+//
+// That line executes the very first time the module is required by Metro.
+// On Android the native module registers as "RCTVoice" (VoiceModule.java getName()).
+// We alias it here — at the TOP LEVEL — so it is in place before Metro evaluates
+// the library's module-level code.
+//
+if (
+  Platform.OS === 'android' &&
+  !NativeModules.Voice &&
+  NativeModules.RCTVoice
+) {
+  NativeModules.Voice = NativeModules.RCTVoice;
+}
+
+// ─── Debug logs (can be removed after confirmation) ──────────────────────────
+console.log('NativeModules.Voice  =', NativeModules?.Voice);
+console.log('NativeModules.RCTVoice =', NativeModules?.RCTVoice);
+
+// ─── Exported helper ─────────────────────────────────────────────────────────
+
 export function getVoiceModule() {
-  if (Platform.OS === 'web') {
-    return null;
-  }
+  if (Platform.OS === 'web') return null;
+
   try {
     const Voice = require('@react-native-voice/voice').default;
-    // Basic sanity check — if native module is missing the JS wrapper will
-    // throw on the first method call, so we verify start() is a function.
+
+    console.log('Voice object =', Voice);
+    console.log('Voice.start typeof =', typeof Voice?.start);
+
+    // If native side is missing, the JS wrapper exists but its bridge methods
+    // will be undefined or will throw when called.
     if (!Voice || typeof Voice.start !== 'function') {
+      console.error('[voiceModule] JS wrapper invalid — native module not linked.');
       return null;
     }
+
     return Voice;
-  } catch {
+  } catch (err) {
+    console.error('[voiceModule] require() threw:', err);
     return null;
   }
 }

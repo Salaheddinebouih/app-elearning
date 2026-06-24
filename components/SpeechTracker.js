@@ -101,6 +101,8 @@ async function requestMicrophonePermission() {
 export default function SpeechTracker({ initialTargetText = '' }) {
   const Voice = useMemo(() => getVoiceModule(), []);
   const voiceAvailable = Voice != null;
+  console.log('voiceAvailable =', voiceAvailable, '| Voice =', Voice);
+
   const navigation = useNavigation();
   const { t, language, isRTL } = useLanguage();
 
