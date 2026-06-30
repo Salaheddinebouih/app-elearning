@@ -4,7 +4,6 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "postinstall": "node ./scripts/patch-voice-android.js",
     "android": "powershell -ExecutionPolicy Bypass -File ./scripts/run-android.ps1",
     "android:install-sdk": "powershell -ExecutionPolicy Bypass -File ./scripts/install-android-platform-tools.ps1",
     "android:apk": "powershell -ExecutionPolicy Bypass -File ./scripts/build-android-apk.ps1",
@@ -14,7 +13,6 @@
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
     "@react-native-async-storage/async-storage": "2.2.0",
-    "@react-native-voice/voice": "^3.2.4",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
@@ -28,6 +26,7 @@
     "expo-linear-gradient": "~15.0.8",
     "expo-notifications": "~0.32.17",
     "expo-speech": "~14.0.8",
+    "expo-speech-recognition": "^3.1.3",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-native": "0.81.5",

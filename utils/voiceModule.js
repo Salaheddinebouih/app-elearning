@@ -19,38 +19,22 @@ if (
 }
 
 // ─── Debug logs (can be removed after confirmation) ──────────────────────────
-console.log('1. NativeModules.Voice =', NativeModules?.Voice);
-console.log('2. NativeModules.RCTVoice =', NativeModules?.RCTVoice);
-console.log(
-  '3. Voice-related NativeModules =',
-  Object.keys(NativeModules || {}).filter(k => k.toLowerCase().includes('voice'))
-);
-console.log('4. Voice object from getVoiceModule() =', getVoiceModule());
-
+console.log('NativeModules.Voice  =', NativeModules?.Voice);
+console.log('NativeModules.RCTVoice =', NativeModules?.RCTVoice);
 
 // ─── Exported helper ─────────────────────────────────────────────────────────
 
 export function getVoiceModule() {
-  if (Platform.OS === 'web') return null;
-
-  try {
-    const Voice = require('@react-native-voice/voice').default;
-
-    console.log('Voice object =', Voice);
-    console.log('Voice.start typeof =', typeof Voice?.start);
-
-    // If native side is missing, the JS wrapper exists but its bridge methods
-    // will be undefined or will throw when called.
-    if (!Voice || typeof Voice.start !== 'function') {
-      console.error('[voiceModule] JS wrapper invalid — native module not linked.');
-      return null;
-    }
-
-    return Voice;
-  } catch (err) {
-    console.error('[voiceModule] require() threw:', err);
+  if (Platform.OS === 'web') {
     return null;
   }
+  
+  // Always ensure listeners are configured when retrieving the module instance
+  if (VoiceInstance.listeners.length === 0) {
+    VoiceInstance.setupListeners();
+  }
+  
+  return VoiceInstance;
 }
 
 export const VOICE_UNAVAILABLE_MESSAGE =

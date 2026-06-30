@@ -16,7 +16,9 @@
       "bundleIdentifier": "com.almandapp"
     },
     "android": {
+       "versionCode": 99,
       "package": "com.almandapp",
+      
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO",
@@ -54,13 +56,12 @@
         }
       ],
       [
-        "@react-native-voice/voice",
+        "expo-speech-recognition",
         {
           "microphonePermission": "Haarlos utilise le micro pour évaluer votre prononciation.",
           "speechRecognitionPermission": "Haarlos utilise la reconnaissance vocale pour corriger votre lecture."
         }
-      ],
-      "./plugins/withAndroidXManifestFix.js"
+      ]
     ],
     "extra": {
       "eas": {
