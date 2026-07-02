@@ -20,6 +20,7 @@ import * as Haptics from 'expo-haptics';
 import * as Clipboard from 'expo-clipboard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import { useLanguage } from '../utils/LanguageContext';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -37,11 +38,11 @@ const BARCODE_TYPES = [
 // ─── Type config ──────────────────────────────────────────────────────────────
 
 const TYPE_CONFIG = {
-  url:   { icon: 'globe-outline',          color: '#4A8FE8', bg: '#DBEAFE', label: 'WEBSITE DETECTED'   },
-  email: { icon: 'mail-outline',           color: '#E8706A', bg: '#FCE7F3', label: 'EMAIL ADDRESS'       },
-  phone: { icon: 'call-outline',           color: '#4DBFA0', bg: '#D1FAE5', label: 'PHONE NUMBER'        },
-  wifi:  { icon: 'wifi-outline',           color: '#7B61FF', bg: '#EDE9FE', label: 'WI-FI NETWORK'       },
-  text:  { icon: 'document-text-outline',  color: '#9090A0', bg: '#F3F4F6', label: 'TEXT CONTENT'        },
+  url:   { icon: 'globe-outline',          color: '#4A8FE8', bg: '#DBEAFE' },
+  email: { icon: 'mail-outline',           color: '#E8706A', bg: '#FCE7F3' },
+  phone: { icon: 'call-outline',           color: '#4DBFA0', bg: '#D1FAE5' },
+  wifi:  { icon: 'wifi-outline',           color: '#7B61FF', bg: '#EDE9FE' },
+  text:  { icon: 'document-text-outline',  color: '#9090A0', bg: '#F3F4F6' },
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -68,15 +69,15 @@ function cleanDisplay(data, contentType) {
   return data;
 }
 
-function timeAgo(ts) {
+function timeAgo(ts, t) {
   const diff  = Date.now() - ts;
   const mins  = Math.floor(diff / 60000);
   const hours = Math.floor(diff / 3600000);
   const days  = Math.floor(diff / 86400000);
-  if (mins < 1)  return 'just now';
-  if (mins < 60) return `${mins}m ago`;
-  if (hours < 24) return `${hours}h ago`;
-  return `${days}d ago`;
+  if (mins < 1)  return t('scan.justNow');
+  if (mins < 60) return t('scan.minsAgo').replace('{n}', mins);
+  if (hours < 24) return t('scan.hoursAgo').replace('{n}', hours);
+  return t('scan.daysAgo').replace('{n}', days);
 }
 
 function generateId() {
@@ -86,6 +87,7 @@ function generateId() {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function ScanScreen() {
+  const { t, isRTL } = useLanguage();
   const [permission, requestPermission] = useCameraPermissions();
   const [facing,        setFacing]        = useState('back');
   const [flashEnabled,  setFlashEnabled]  = useState(false);
@@ -226,9 +228,9 @@ export default function ScanScreen() {
         <StatusBar style="dark" translucent={false} backgroundColor="#EEEEFF" />
         <View style={styles.permissionScreen}>
           <Ionicons name="camera-off-outline" size={64} color="#9090A0" />
-          <Text style={styles.permTitle}>Camera access required</Text>
+          <Text style={styles.permTitle}>{t('scan.permTitle')}</Text>
           <Text style={styles.permSubtitle}>
-            Allow camera access to scan QR codes and barcodes
+            {t('scan.permSubtitle')}
           </Text>
           <TouchableOpacity
             onPress={requestPermission}
@@ -241,7 +243,7 @@ export default function ScanScreen() {
               end={{ x: 1, y: 0 }}
               style={styles.permBtnGradient}
             >
-              <Text style={styles.permBtnLabel}>Allow Camera Access</Text>
+              <Text style={styles.permBtnLabel}>{t('scan.permBtn')}</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -260,9 +262,9 @@ export default function ScanScreen() {
         scrollEnabled={!sheetVisible}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.title}>Scan</Text>
-          <Text style={styles.subtitle}>Point camera at any QR code or barcode</Text>
+        <View style={[styles.header, isRTL && { alignItems: 'flex-end' }]}>
+          <Text style={[styles.title, isRTL && { textAlign: 'right' }]}>{t('scan.title')}</Text>
+          <Text style={[styles.subtitle, isRTL && { textAlign: 'right' }]}>{t('scan.subtitle')}</Text>
         </View>
 
         {/* Camera container */}
@@ -334,24 +336,26 @@ export default function ScanScreen() {
         {/* Scan history */}
         {recentHistory.length > 0 && (
           <View style={styles.historySection}>
-            <Text style={styles.historySectionTitle}>Recent scans</Text>
+            <Text style={[styles.historySectionTitle, isRTL && { textAlign: 'right' }]}>
+              {t('scan.recentScans')}
+            </Text>
             {recentHistory.map((item) => {
               const cfg = TYPE_CONFIG[item.contentType] || TYPE_CONFIG.text;
               return (
                 <TouchableOpacity
                   key={item.id}
-                  style={styles.historyCard}
+                  style={[styles.historyCard, isRTL && { flexDirection: 'row-reverse' }]}
                   onPress={() => handleHistoryTap(item)}
                   activeOpacity={0.7}
                 >
                   <View style={[styles.historyIcon, { backgroundColor: cfg.bg }]}>
                     <Ionicons name={cfg.icon} size={18} color={cfg.color} />
                   </View>
-                  <View style={styles.historyInfo}>
-                    <Text style={styles.historyData} numberOfLines={1}>
+                  <View style={[styles.historyInfo, isRTL && { alignItems: 'flex-end' }]}>
+                    <Text style={[styles.historyData, isRTL && { textAlign: 'right' }]} numberOfLines={1}>
                       {cleanDisplay(item.data, item.contentType)}
                     </Text>
-                    <Text style={styles.historyTime}>{timeAgo(item.scannedAt)}</Text>
+                    <Text style={styles.historyTime}>{timeAgo(item.scannedAt, t)}</Text>
                   </View>
                   <TouchableOpacity
                     onPress={() => deleteHistoryItem(item.id)}
@@ -368,7 +372,7 @@ export default function ScanScreen() {
 
         {recentHistory.length === 0 && (
           <View style={styles.historyEmpty}>
-            <Text style={styles.historyEmptyText}>No scans yet</Text>
+            <Text style={styles.historyEmptyText}>{t('scan.noScans')}</Text>
           </View>
         )}
       </ScrollView>
@@ -407,6 +411,7 @@ export default function ScanScreen() {
 // ─── Result sheet content ─────────────────────────────────────────────────────
 
 function ResultContent({ result, pwVisible, setPwVisible, onClose }) {
+  const { t, isRTL } = useLanguage();
   const { data, contentType } = result;
   const cfg = TYPE_CONFIG[contentType] || TYPE_CONFIG.text;
   const wifi = contentType === 'wifi' ? parseWifi(data) : null;
@@ -422,40 +427,50 @@ function ResultContent({ result, pwVisible, setPwVisible, onClose }) {
     Linking.openURL(url).catch(() => {});
   };
 
+  const getLabel = (type) => {
+    switch (type) {
+      case 'url':   return t('scan.webDetected');
+      case 'email': return t('scan.emailAddress');
+      case 'phone': return t('scan.phoneNumber');
+      case 'wifi':  return t('scan.wifiNetwork');
+      default:      return t('scan.textContent');
+    }
+  };
+
   return (
     <>
       {/* Type badge row */}
-      <View style={rs.typeRow}>
+      <View style={[rs.typeRow, isRTL && { flexDirection: 'row-reverse' }]}>
         <View style={[rs.iconCircle, { backgroundColor: cfg.bg }]}>
           <Ionicons name={cfg.icon} size={24} color={cfg.color} />
         </View>
-        <Text style={rs.typeLabel}>{cfg.label}</Text>
+        <Text style={rs.typeLabel}>{getLabel(contentType)}</Text>
       </View>
 
       {/* ── URL ── */}
       {contentType === 'url' && (
         <>
-          <Text style={rs.dataText} numberOfLines={3}>{data}</Text>
-          <GradBtn label="Open in Browser"  onPress={() => openLink(data)} />
-          <MutedBtn label="Copy Link" icon="copy-outline" onPress={() => copy(data)} />
+          <Text style={[rs.dataText, isRTL && { textAlign: 'right' }]} numberOfLines={3}>{data}</Text>
+          <GradBtn label={t('scan.openBrowser')}  onPress={() => openLink(data)} />
+          <MutedBtn label={t('scan.copyLink')} icon="copy-outline" onPress={() => copy(data)} />
         </>
       )}
 
       {/* ── Email ── */}
       {contentType === 'email' && (
         <>
-          <Text style={rs.dataText}>{cleanEmail}</Text>
-          <GradBtn label="Open Mail App"  onPress={() => openLink(data)} />
-          <MutedBtn label="Copy Email" icon="copy-outline" onPress={() => copy(cleanEmail)} />
+          <Text style={[rs.dataText, isRTL && { textAlign: 'right' }]}>{cleanEmail}</Text>
+          <GradBtn label={t('scan.openMail')}  onPress={() => openLink(data)} />
+          <MutedBtn label={t('scan.copyEmail')} icon="copy-outline" onPress={() => copy(cleanEmail)} />
         </>
       )}
 
       {/* ── Phone ── */}
       {contentType === 'phone' && (
         <>
-          <Text style={rs.dataText}>{cleanPhone}</Text>
-          <GradBtn label="Call Number" onPress={() => openLink(data)} />
-          <MutedBtn label="Copy Number" icon="copy-outline" onPress={() => copy(cleanPhone)} />
+          <Text style={[rs.dataText, isRTL && { textAlign: 'right' }]}>{cleanPhone}</Text>
+          <GradBtn label={t('scan.callNumber')} onPress={() => openLink(data)} />
+          <MutedBtn label={t('scan.copyNumber')} icon="copy-outline" onPress={() => copy(cleanPhone)} />
         </>
       )}
 
@@ -463,14 +478,14 @@ function ResultContent({ result, pwVisible, setPwVisible, onClose }) {
       {contentType === 'wifi' && wifi && (
         <>
           <View style={rs.wifiBlock}>
-            <View style={rs.wifiRow}>
-              <Text style={rs.wifiLabel}>Network</Text>
+            <View style={[rs.wifiRow, isRTL && { flexDirection: 'row-reverse' }]}>
+              <Text style={rs.wifiLabel}>{t('scan.network')}</Text>
               <Text style={rs.wifiValue}>{wifi.ssid}</Text>
             </View>
             <View style={rs.wifiDivider} />
-            <View style={rs.wifiRow}>
-              <Text style={rs.wifiLabel}>Password</Text>
-              <View style={rs.wifiPwRow}>
+            <View style={[rs.wifiRow, isRTL && { flexDirection: 'row-reverse' }]}>
+              <Text style={rs.wifiLabel}>{t('scan.password')}</Text>
+              <View style={[rs.wifiPwRow, isRTL && { flexDirection: 'row-reverse' }]}>
                 <Text style={rs.wifiValue}>
                   {pwVisible ? wifi.password : '••••••••'}
                 </Text>
@@ -488,7 +503,7 @@ function ResultContent({ result, pwVisible, setPwVisible, onClose }) {
               </View>
             </View>
           </View>
-          <GradBtn label="Copy Password" onPress={() => copy(wifi.password)} />
+          <GradBtn label={t('scan.copyPassword')} onPress={() => copy(wifi.password)} />
         </>
       )}
 
@@ -496,11 +511,11 @@ function ResultContent({ result, pwVisible, setPwVisible, onClose }) {
       {contentType === 'text' && (
         <>
           <View style={rs.textBox}>
-            <Text style={rs.textBoxContent} selectable>{data}</Text>
+            <Text style={[rs.textBoxContent, isRTL && { textAlign: 'right' }]} selectable>{data}</Text>
           </View>
-          <GradBtn label="Copy Text" onPress={() => copy(data)} />
+          <GradBtn label={t('scan.copyText')} onPress={() => copy(data)} />
           <MutedBtn
-            label="Search on Google"
+            label={t('scan.searchGoogle')}
             icon="search-outline"
             onPress={() => openLink(`https://www.google.com/search?q=${encodeURIComponent(data)}`)}
           />
@@ -509,7 +524,7 @@ function ResultContent({ result, pwVisible, setPwVisible, onClose }) {
 
       {/* Scan again */}
       <TouchableOpacity style={rs.scanAgainBtn} onPress={onClose} activeOpacity={0.7}>
-        <Text style={rs.scanAgainText}>Scan again</Text>
+        <Text style={rs.scanAgainText}>{t('scan.scanAgain')}</Text>
       </TouchableOpacity>
     </>
   );
@@ -531,8 +546,9 @@ function GradBtn({ label, onPress }) {
 }
 
 function MutedBtn({ label, icon, onPress }) {
+  const { isRTL } = useLanguage();
   return (
-    <TouchableOpacity style={rs.mutedBtn} onPress={onPress} activeOpacity={0.75}>
+    <TouchableOpacity style={[rs.mutedBtn, isRTL && { flexDirection: 'row-reverse' }]} onPress={onPress} activeOpacity={0.75}>
       <Ionicons name={icon} size={16} color="#1A1A2E" />
       <Text style={rs.mutedBtnLabel}>{label}</Text>
     </TouchableOpacity>
@@ -793,7 +809,7 @@ const rs = StyleSheet.create({
     gap: 8,
     marginBottom: 10,
   },
-  mutedBtnLabel: { fontSize: 15, color: '#1A1A2E', fontWeight: '500' },
+  mutedBtnLabel: { fontSize: 15, color: '#1A1A2E', fontWeight: '500', marginHorizontal: 4 },
 
   /* Scan again */
   scanAgainBtn: { alignItems: 'center', paddingVertical: 12, marginTop: 4 },

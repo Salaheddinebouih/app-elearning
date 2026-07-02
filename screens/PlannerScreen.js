@@ -17,14 +17,15 @@ import {
   todayStr, DEFAULT_SETTINGS,
 } from '../utils/plannerUtils';
 import AddTaskModal from '../components/AddTaskModal';
+import { useLanguage } from '../utils/LanguageContext';
 
 const { width: W } = Dimensions.get('window');
 
-const SECTIONS = [
-  { key: 'dashboard', label: 'Today',  icon: 'sunny-outline'           },
-  { key: 'tasks',     label: 'Tasks',  icon: 'checkmark-circle-outline' },
-  { key: 'timer',     label: 'Focus',  icon: 'timer-outline'            },
-  { key: 'stats',     label: 'Stats',  icon: 'bar-chart-outline'        },
+const SECTION_KEYS = [
+  { key: 'dashboard', icon: 'sunny-outline'           },
+  { key: 'tasks',     icon: 'checkmark-circle-outline' },
+  { key: 'timer',     icon: 'timer-outline'            },
+  { key: 'stats',     icon: 'bar-chart-outline'        },
 ];
 
 const TIMER_COLORS = {
@@ -32,8 +33,6 @@ const TIMER_COLORS = {
   short: ['#10B981', '#059669'],
   long:  ['#3B82F6', '#1D4ED8'],
 };
-
-const TIMER_LABELS = { focus: 'FOCUS', short: 'SHORT BREAK', long: 'LONG BREAK' };
 
 function fmt(s) {
   return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
@@ -48,7 +47,18 @@ function fmtMin(m) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function PlannerScreen() {
+  const { t, isRTL } = useLanguage();
+  const SECTIONS = SECTION_KEYS.map(s => ({
+    ...s,
+    label: t(`planner.section${s.key.charAt(0).toUpperCase() + s.key.slice(1)}`),
+  }));
+  const TIMER_LABELS = {
+    focus: t('planner.focusLabel'),
+    short: t('planner.shortLabel'),
+    long:  t('planner.longLabel'),
+  };
   const [section,      setSection]      = useState('tasks');
+
   const [tasks,        setTasks]        = useState([]);
   const [sessions,     setSessions]     = useState([]);
   const [settings,     setSettings]     = useState(DEFAULT_SETTINGS);
@@ -166,13 +176,15 @@ export default function PlannerScreen() {
       setTimeLeft(secondsFor(nextType));
 
       sendNotif(
-        'Focus session complete! 🎉',
-        nextType === 'long' ? `Take a long break — ${cfg.longBreakDuration} min` : `Take a short break — ${cfg.shortBreakDuration} min`
+        t('planner.focusComplete'),
+        nextType === 'long'
+          ? t('planner.longBreakMsg').replace('{n}', cfg.longBreakDuration)
+          : t('planner.shortBreakMsg').replace('{n}', cfg.shortBreakDuration)
       );
     } else {
       setTimerType('focus');
       setTimeLeft(cfg.focusDuration * 60);
-      sendNotif('Break over! 💪', 'Time to focus again.');
+      sendNotif(t('planner.breakOver'), t('planner.backToFocus'));
     }
   }
 
@@ -199,10 +211,10 @@ export default function PlannerScreen() {
 
   function switchType(type) {
     if (timerRunning) {
-      Alert.alert('Timer Running', 'Stop the current session before switching?', [
-        { text: 'Cancel', style: 'cancel' },
+      Alert.alert(t('planner.timerRunning'), t('planner.switchConfirm'), [
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'Switch', style: 'destructive',
+          text: t('planner.switchBtn'), style: 'destructive',
           onPress: () => {
             setTimerRunning(false);
             setTimerType(type);
@@ -232,10 +244,10 @@ export default function PlannerScreen() {
   }
 
   function handleDelete(id) {
-    Alert.alert('Delete Task', 'Remove this task?', [
-      { text: 'Cancel', style: 'cancel' },
+    Alert.alert(t('planner.deleteTask'), t('planner.deleteConfirm'), [
+      { text: t('common.cancel'), style: 'cancel' },
       {
-        text: 'Delete', style: 'destructive',
+        text: t('common.delete'), style: 'destructive',
         onPress: async () => {
           await deleteTask(id);
           setTasks(await loadTasks());
@@ -265,10 +277,10 @@ export default function PlannerScreen() {
   const pendingTodayCount = todayTasks.length - completedTodayCount;
 
   const SECTION_SUBTITLE = {
-    dashboard: 'Your day at a glance',
-    tasks: 'Plan and complete today\'s tasks',
-    timer: 'Stay focused with simple sessions',
-    stats: 'Track your study consistency',
+    dashboard: t('planner.subToday'),
+    tasks:     t('planner.subTasks'),
+    timer:     t('planner.subTimer'),
+    stats:     t('planner.subStats'),
   };
 
   // ── Dashboard ──────────────────────────────────────────────────────────────
@@ -292,19 +304,19 @@ export default function PlannerScreen() {
           <View style={styles.heroTop}>
             <View>
               <Text style={styles.heroDate}>
-                {new Date().toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric' })}
+                {new Date().toLocaleDateString(isRTL ? 'ar' : 'en', { weekday: 'long', month: 'long', day: 'numeric' })}
               </Text>
-              <Text style={styles.heroTitle}>Today's Plan</Text>
+              <Text style={styles.heroTitle}>{t('planner.todayPlan')}</Text>
             </View>
             <View style={styles.streakBadge}>
               <Ionicons name="flame" size={13} color="#FFFFFF" />
-              <Text style={styles.streakBadgeText}> {streak}d streak</Text>
+              <Text style={styles.streakBadgeText}> {t('planner.streakDays').replace('{n}', streak)}</Text>
             </View>
           </View>
 
           <View style={styles.goalRow}>
             <View>
-              <Text style={styles.goalLabel}>Daily goal</Text>
+              <Text style={styles.goalLabel}>{t('planner.dailyGoal')}</Text>
               <Text style={styles.goalValue}>
                 {fmtMin(todayStats.totalMinutes)} / {fmtMin(settings.dailyGoalMinutes)}
               </Text>
@@ -320,9 +332,9 @@ export default function PlannerScreen() {
         {/* Quick stats */}
         <View style={styles.statsRow}>
           {[
-            { icon: 'checkmark-circle', label: 'Done',     value: `${todayStats.completedTasks}/${todayStats.totalTasks}`, color: '#6366F1' },
-            { icon: 'timer',            label: 'Time',     value: fmtMin(todayStats.totalMinutes),                         color: '#8B5CF6' },
-            { icon: 'leaf',             label: 'Sessions', value: String(todayStats.focusSessions),                        color: '#EC4899' },
+            { icon: 'checkmark-circle', label: t('planner.done'),     value: `${todayStats.completedTasks}/${todayStats.totalTasks}`, color: '#6366F1' },
+            { icon: 'timer',            label: t('planner.studyTime'), value: fmtMin(todayStats.totalMinutes),                         color: '#8B5CF6' },
+            { icon: 'leaf',             label: t('planner.sessions'),  value: String(todayStats.focusSessions),                        color: '#EC4899' },
           ].map(s => (
             <View key={s.label} style={styles.statCard}>
               <View style={[styles.statIcon, { backgroundColor: s.color + '18' }]}>
@@ -336,18 +348,18 @@ export default function PlannerScreen() {
 
         {/* Today tasks preview */}
         <View style={styles.rowBetween}>
-          <Text style={styles.sectionTitle}>Today's Tasks</Text>
+          <Text style={styles.sectionTitle}>{t('planner.todayTasks')}</Text>
           <TouchableOpacity onPress={() => setSection('tasks')}>
-            <Text style={styles.seeAll}>See all →</Text>
+            <Text style={styles.seeAll}>{t('planner.seeAll')}</Text>
           </TouchableOpacity>
         </View>
 
         {todayTasks.length === 0 ? (
           <View style={styles.emptyCard}>
             <Ionicons name="calendar-outline" size={28} color="#D1D5DB" />
-            <Text style={styles.emptyText}>No tasks for today</Text>
+            <Text style={styles.emptyText}>{t('planner.noTasksToday')}</Text>
             <TouchableOpacity style={styles.emptyAddBtn} onPress={openAdd}>
-              <Text style={styles.emptyAddText}>+ Add a task</Text>
+              <Text style={styles.emptyAddText}>{t('planner.addFirst')}</Text>
             </TouchableOpacity>
           </View>
         ) : (
@@ -364,7 +376,7 @@ export default function PlannerScreen() {
         )}
 
         {/* Quick focus */}
-        <Text style={[styles.sectionTitle, { marginTop: 16, marginBottom: 10 }]}>Quick Focus</Text>
+        <Text style={[styles.sectionTitle, { marginTop: 16, marginBottom: 10 }]}>{t('planner.quickFocus')}</Text>
         <TouchableOpacity
           style={styles.quickFocusCard}
           onPress={() => setSection('timer')}
@@ -384,12 +396,12 @@ export default function PlannerScreen() {
               />
               <View>
                 <Text style={[styles.quickFocusTitle, timerRunning && { color: '#FFFFFF' }]}>
-                  {timerRunning ? 'Session in progress' : 'Start Pomodoro'}
+                  {timerRunning ? t('planner.sessionInProgress') : t('planner.startPomodoro')}
                 </Text>
                 <Text style={[styles.quickFocusSub, timerRunning && { color: 'rgba(255,255,255,0.75)' }]}>
                   {timerRunning
-                    ? fmt(timeLeft) + ' remaining · ' + TIMER_LABELS[timerType]
-                    : `${settings.focusDuration} min focus session`}
+                    ? `${fmt(timeLeft)} ${t('planner.remaining')} · ${TIMER_LABELS[timerType]}`
+                    : `${settings.focusDuration} ${t('planner.focusMin')}`}
                 </Text>
               </View>
             </View>
@@ -415,24 +427,24 @@ export default function PlannerScreen() {
       <View style={{ flex: 1 }}>
         <View style={styles.planSummaryCard}>
           <View style={styles.planSummaryTop}>
-            <Text style={styles.planSummaryTitle}>Today</Text>
+            <Text style={styles.planSummaryTitle}>{t('planner.today')}</Text>
             <TouchableOpacity style={styles.planSummaryAdd} onPress={openAdd} activeOpacity={0.75}>
               <Ionicons name="add" size={16} color="#2563EB" />
-              <Text style={styles.planSummaryAddText}>Add task</Text>
+              <Text style={styles.planSummaryAddText}>{t('planner.addTask')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.planSummaryStats}>
             <View style={styles.planStatPill}>
               <Text style={styles.planStatValue}>{completedTodayCount}</Text>
-              <Text style={styles.planStatLabel}>Done</Text>
+              <Text style={styles.planStatLabel}>{t('planner.done')}</Text>
             </View>
             <View style={styles.planStatPill}>
               <Text style={styles.planStatValue}>{pendingTodayCount}</Text>
-              <Text style={styles.planStatLabel}>Pending</Text>
+              <Text style={styles.planStatLabel}>{t('planner.pending')}</Text>
             </View>
             <View style={styles.planStatPill}>
               <Text style={styles.planStatValue}>{todayTasks.length}</Text>
-              <Text style={styles.planStatLabel}>Total</Text>
+              <Text style={styles.planStatLabel}>{t('planner.total')}</Text>
             </View>
           </View>
         </View>
@@ -444,7 +456,7 @@ export default function PlannerScreen() {
           contentContainerStyle={styles.filterContent}
           style={styles.filterScroll}
         >
-          {[{ key: 'all', label: 'All' }, ...CATEGORIES.map(c => ({ key: c, label: CATEGORY_META[c].label }))].map(({ key, label }) => {
+          {[{ key: 'all', label: t('planner.allFilter') }, ...CATEGORIES.map(c => ({ key: c, label: CATEGORY_META[c].label }))].map(({ key, label }) => {
             const active = filterCat === key;
             const meta   = CATEGORY_META[key];
             return (
@@ -472,9 +484,9 @@ export default function PlannerScreen() {
           <View style={styles.emptyState}>
             <Ionicons name="checkmark-done-circle-outline" size={52} color="#E5E7EB" />
             <Text style={styles.emptyStateTitle}>
-              {filterCat === 'all' ? 'No tasks for today' : `No ${CATEGORY_META[filterCat]?.label} tasks`}
+              {filterCat === 'all' ? t('planner.noTasksToday') : t('planner.noTasksFilter')}
             </Text>
-            <Text style={styles.emptyStateSub}>Tap + to add your first task</Text>
+            <Text style={styles.emptyStateSub}>{t('planner.tapToAdd')}</Text>
           </View>
         ) : (
           <FlatList
@@ -529,7 +541,7 @@ export default function PlannerScreen() {
             />
           ))}
           <Text style={styles.sessionCountLabel}>
-            Session {sessionCount % settings.sessionsBeforeLongBreak + 1}
+            {t('planner.session')} {sessionCount % settings.sessionsBeforeLongBreak + 1}
           </Text>
         </View>
 
@@ -559,9 +571,9 @@ export default function PlannerScreen() {
         {/* Type selector */}
         <View style={styles.typeRow}>
           {[
-            { key: 'focus', label: 'Focus',       dur: settings.focusDuration },
-            { key: 'short', label: 'Short Break',  dur: settings.shortBreakDuration },
-            { key: 'long',  label: 'Long Break',   dur: settings.longBreakDuration },
+            { key: 'focus', label: t('planner.focus'),      dur: settings.focusDuration },
+            { key: 'short', label: t('planner.shortBreak'), dur: settings.shortBreakDuration },
+            { key: 'long',  label: t('planner.longBreak'),  dur: settings.longBreakDuration },
           ].map(({ key, label, dur }) => (
             <TouchableOpacity
               key={key}
@@ -605,7 +617,7 @@ export default function PlannerScreen() {
         {/* Linked task */}
         {focusTasks.length > 0 && (
           <>
-            <Text style={styles.subLabel}>LINKED TASK</Text>
+            <Text style={styles.subLabel}>{t('planner.linkedTask')}</Text>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -616,7 +628,7 @@ export default function PlannerScreen() {
                 onPress={() => setSelectedTaskId(null)}
               >
                 <Text style={[styles.linkedChipText, !selectedTaskId && { color: '#6366F1' }]}>
-                  Free focus
+                  {t('planner.freeFocus')}
                 </Text>
               </TouchableOpacity>
               {focusTasks.map(t => {
@@ -644,14 +656,14 @@ export default function PlannerScreen() {
         {/* Today sessions */}
         {todaySessions.length > 0 && (
           <>
-            <Text style={styles.subLabel}>TODAY'S SESSIONS</Text>
+            <Text style={styles.subLabel}>{t('planner.todaySessions')}</Text>
             {todaySessions.slice(0, 5).map(s => (
               <View key={s.id} style={styles.sessionHistRow}>
                 <View style={styles.sessionHistIcon}>
                   <Ionicons name="checkmark-circle" size={14} color="#10B981" />
                 </View>
                 <Text style={styles.sessionHistText}>
-                  {s.durationMinutes} min focus ·{' '}
+                  {s.durationMinutes} {t('planner.minFocus')} ·{' '}
                   {new Date(s.completedAt).toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' })}
                 </Text>
               </View>
@@ -690,12 +702,12 @@ export default function PlannerScreen() {
 
         {/* Summary banner */}
         <LinearGradient colors={['#1E1B4B', '#3730A3']} style={styles.summaryCard}>
-          <Text style={styles.summaryEyebrow}>THIS WEEK</Text>
+          <Text style={styles.summaryEyebrow}>{t('planner.thisWeek')}</Text>
           <View style={styles.summaryRow}>
             {[
-              { val: fmtMin(weekMin), lbl: 'Study time' },
-              { val: String(weekSess), lbl: 'Sessions' },
-              { val: String(streak),  lbl: 'Day streak' },
+              { val: fmtMin(weekMin), lbl: t('planner.studyTime') },
+              { val: String(weekSess), lbl: t('planner.sessions') },
+              { val: String(streak),  lbl: t('planner.dayStreak') },
             ].map((item, i) => (
               <React.Fragment key={item.lbl}>
                 {i > 0 && <View style={styles.summaryDivider} />}
@@ -710,7 +722,7 @@ export default function PlannerScreen() {
 
         {/* Weekly bar chart */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Daily Activity</Text>
+          <Text style={styles.cardTitle}>{t('planner.dailyActivity')}</Text>
           <View style={styles.barChart}>
             {week.map(day => (
               <View key={day.date} style={styles.barCol}>
@@ -735,12 +747,12 @@ export default function PlannerScreen() {
 
         {/* Today progress */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Today's Progress</Text>
+          <Text style={styles.cardTitle}>{t('planner.todayProgress')}</Text>
           <View style={styles.todayRow}>
             {[
-              { val: String(todayStats.completedTasks), lbl: 'Completed' },
-              { val: String(todayStats.totalTasks),     lbl: 'Total'     },
-              { val: `${todayStats.rate}%`,             lbl: 'Done'      },
+              { val: String(todayStats.completedTasks), lbl: t('planner.completed') },
+              { val: String(todayStats.totalTasks),     lbl: t('planner.total')     },
+              { val: `${todayStats.rate}%`,             lbl: t('planner.done')      },
             ].map(item => (
               <View key={item.lbl} style={styles.todayItem}>
                 <Text style={styles.todayVal}>{item.val}</Text>
@@ -761,7 +773,7 @@ export default function PlannerScreen() {
         {/* Category breakdown */}
         {catData.length > 0 && (
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>By Category</Text>
+            <Text style={styles.cardTitle}>{t('planner.byCategory')}</Text>
             {catData.map(({ cat, mins }) => {
               const m   = CATEGORY_META[cat];
               const pct = Math.round((mins / totalCatMin) * 100);
@@ -782,9 +794,9 @@ export default function PlannerScreen() {
         {catData.length === 0 && sessions.length === 0 && (
           <View style={styles.emptyCard}>
             <Ionicons name="analytics-outline" size={32} color="#D1D5DB" />
-            <Text style={styles.emptyText}>No data yet</Text>
+            <Text style={styles.emptyText}>{t('planner.noData')}</Text>
             <Text style={[styles.emptyText, { fontSize: 12, marginTop: 2 }]}>
-              Complete a focus session to see stats
+              {t('planner.completeFocus')}
             </Text>
           </View>
         )}
@@ -803,7 +815,7 @@ export default function PlannerScreen() {
       {/* Header */}
       <View style={styles.header}>
         <View>
-          <Text style={styles.headerTitle}>Planner</Text>
+          <Text style={styles.headerTitle}>{t('planner.title')}</Text>
           <Text style={styles.headerSubtitle}>{SECTION_SUBTITLE[section]}</Text>
         </View>
         {section === 'tasks' && (

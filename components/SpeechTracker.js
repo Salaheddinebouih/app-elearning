@@ -8,6 +8,8 @@ import {
   Platform,
   ScrollView,
   TouchableOpacity,
+  Alert,
+  TextInput,
 } from 'react-native';
 import { Audio } from 'expo-av';
 import { getVoiceModule, VOICE_UNAVAILABLE_MESSAGE } from '../utils/voiceModule';
@@ -18,6 +20,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import {
+  getPracticeTexts,
+  savePracticeText,
+  updatePracticeText,
+  deletePracticeText,
+} from '../services/practiceStorage';
 
 const ARABIC_DIACRITICS = /َ|ً|ُ|ٌ|ِ|ٍ|ْ|ّ|ـ/g;
 
@@ -125,7 +133,124 @@ export default function SpeechTracker({ initialTargetText = '' }) {
     voiceAvailable ? null : VOICE_UNAVAILABLE_MESSAGE
   );
 
+  // Custom Practice states
+  const [customTexts, setCustomTexts] = useState([]);
+  const [customTitle, setCustomTitle] = useState('');
+  const [customText, setCustomText] = useState('');
+  const [editingTextId, setEditingTextId] = useState(null);
+  const [searchText, setSearchText] = useState('');
+  const [customPracticeActiveText, setCustomPracticeActiveText] = useState(null);
+
   const activeSentence = sentencesList[currentIndex] || null;
+
+  const loadCustomTexts = useCallback(async () => {
+    const data = await getPracticeTexts();
+    setCustomTexts(data);
+  }, []);
+
+  const handleSaveCustomText = async () => {
+    if (!customTitle.trim()) {
+      Alert.alert(t('common.error'), t('custom.errorTitle'));
+      return;
+    }
+    if (!customText.trim()) {
+      Alert.alert(t('common.error'), t('custom.errorText'));
+      return;
+    }
+
+    try {
+      if (editingTextId) {
+        await updatePracticeText(editingTextId, {
+          title: customTitle.trim(),
+          text: customText.trim(),
+        });
+        setEditingTextId(null);
+      } else {
+        await savePracticeText(customTitle.trim(), customText.trim());
+      }
+      setCustomTitle('');
+      setCustomText('');
+      loadCustomTexts();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingTextId(null);
+    setCustomTitle('');
+    setCustomText('');
+  };
+
+  const handleEditCustomText = (item) => {
+    setEditingTextId(item.id);
+    setCustomTitle(item.title);
+    setCustomText(item.text);
+  };
+
+  const handleToggleFavorite = async (item) => {
+    await updatePracticeText(item.id, { favorite: !item.favorite });
+    loadCustomTexts();
+  };
+
+  const handleDeleteCustomText = (item) => {
+    Alert.alert(
+      t('common.confirm'),
+      t('custom.deleteConfirm'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: async () => {
+            await deletePracticeText(item.id);
+            loadCustomTexts();
+            if (customPracticeActiveText?.id === item.id) {
+              setCustomPracticeActiveText(null);
+              setSentencesList([]);
+              setCurrentIndex(0);
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const handlePracticeCustomText = (item) => {
+    resetPracticeState();
+    
+    const phrases = item.text
+      .split(/[.?!]|\n/)
+      .map((p) => p.trim())
+      .filter(Boolean);
+
+    if (phrases.length === 0) {
+      Alert.alert('Info', t('custom.errorNoSentences'));
+      return;
+    }
+
+    const items = phrases.map((phrase, index) => ({
+      id: `custom-practice-${item.id}-${index}`,
+      sentence: phrase,
+      translation: '',
+      level: 'Custom Practice',
+    }));
+
+    setSentencesList(items);
+    setCurrentIndex(0);
+    setCustomPracticeActiveText(item);
+  };
+
+  const filteredTexts = useMemo(() => {
+    const filtered = customTexts.filter((t) =>
+      t.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+    return filtered.sort((a, b) => {
+      if (a.favorite && !b.favorite) return -1;
+      if (!a.favorite && b.favorite) return 1;
+      return b.createdAt - a.createdAt;
+    });
+  }, [customTexts, searchText]);
 
   // Load saved custom sentences
   const loadSavedSentences = async () => {
@@ -197,6 +322,10 @@ export default function SpeechTracker({ initialTargetText = '' }) {
     init();
   }, [initialTargetText]);
 
+  useEffect(() => {
+    loadCustomTexts();
+  }, [loadCustomTexts]);
+
   const resetPracticeState = () => {
     setAccuracy(null);
     setWordResults([]);
@@ -218,6 +347,10 @@ export default function SpeechTracker({ initialTargetText = '' }) {
     } else if (cat === 'custom' && customSentence) {
       setSentencesList([customSentence]);
       setCurrentIndex(0);
+    } else if (cat === 'custom_practice') {
+      setSentencesList([]);
+      setCurrentIndex(0);
+      setCustomPracticeActiveText(null);
     } else {
       const filtered = CURATED_SENTENCES.filter((s) => s.level === cat);
       setSentencesList(filtered);
@@ -392,7 +525,7 @@ export default function SpeechTracker({ initialTargetText = '' }) {
   const busy = isRecording || isProcessing;
 
   const categories = useMemo(() => {
-    const cats = ['A1', 'A2', 'B1', 'B2', 'saved'];
+    const cats = ['A1', 'A2', 'B1', 'B2', 'saved', 'custom_practice'];
     if (customSentence) {
       cats.push('custom');
     }
@@ -430,6 +563,8 @@ export default function SpeechTracker({ initialTargetText = '' }) {
               ? t('speechTracker.savedCategory')
               : cat === 'custom'
               ? 'Temp'
+              : cat === 'custom_practice'
+              ? t('custom.tabLabel')
               : cat;
 
             return (
@@ -467,6 +602,148 @@ export default function SpeechTracker({ initialTargetText = '' }) {
           <View style={styles.centerWrapper}>
             <ActivityIndicator size="large" color="#4F46E5" />
           </View>
+        ) : activeCategory === 'custom_practice' && !customPracticeActiveText ? (
+          // Custom Practice Screen (List & Form)
+          <View style={styles.customPracticeContainer}>
+            {/* Form Card */}
+            <View style={styles.formCard}>
+              <Text style={styles.formTitle}>
+                {editingTextId ? t('custom.editTitle') : t('custom.newTitle')}
+              </Text>
+              
+              <TextInput
+                style={styles.input}
+                placeholder={t('custom.titlePlaceholder')}
+                placeholderTextColor="#94A3B8"
+                value={customTitle}
+                onChangeText={setCustomTitle}
+              />
+              
+              <TextInput
+                style={[styles.input, styles.textArea]}
+                placeholder={t('custom.textPlaceholder')}
+                placeholderTextColor="#94A3B8"
+                value={customText}
+                onChangeText={setCustomText}
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+              />
+              
+              <View style={styles.formButtonsRow}>
+                <TouchableOpacity
+                  style={styles.saveBtn}
+                  onPress={handleSaveCustomText}
+                  activeOpacity={0.8}
+                >
+                  <LinearGradient
+                    colors={['#7C3AED', '#4F46E5']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.saveBtnGradient}
+                  >
+                    <Text style={styles.saveBtnText}>
+                      {editingTextId ? t('custom.update') : t('custom.save')}
+                    </Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+                
+                {editingTextId && (
+                  <TouchableOpacity
+                    style={styles.cancelBtn}
+                    onPress={handleCancelEdit}
+                    activeOpacity={0.8}
+                  >
+                    <Text style={styles.cancelBtnText}>{t('custom.cancel')}</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+
+            {/* Search Bar */}
+            <View style={styles.searchContainer}>
+              <Ionicons name="search" size={20} color="#94A3B8" style={styles.searchIcon} />
+              <TextInput
+                style={styles.searchInput}
+                placeholder={t('custom.searchPlaceholder')}
+                placeholderTextColor="#94A3B8"
+                value={searchText}
+                onChangeText={setSearchText}
+              />
+            </View>
+
+            {/* List of Custom Texts */}
+            {filteredTexts.length === 0 ? (
+              <View style={styles.emptyCustomCard}>
+                <Ionicons name="document-text-outline" size={48} color="#94A3B8" />
+                <Text style={styles.emptyText}>
+                  {searchText
+                    ? t('custom.emptySearch')
+                    : t('custom.emptyList')}
+                </Text>
+              </View>
+            ) : (
+              filteredTexts.map((item) => {
+                const previewLines = item.text
+                  .split('\n')
+                  .filter(line => line.trim())
+                  .slice(0, 3);
+                
+                return (
+                  <View key={item.id} style={styles.customTextCard}>
+                    <View style={styles.cardHeaderRow}>
+                      <Text style={styles.customCardTitle} numberOfLines={1}>
+                        {item.title}
+                      </Text>
+                      <TouchableOpacity
+                        onPress={() => handleToggleFavorite(item)}
+                        style={styles.favoriteBtn}
+                      >
+                        <Ionicons
+                          name={item.favorite ? 'star' : 'star-outline'}
+                          size={22}
+                          color={item.favorite ? '#F59E0B' : '#94A3B8'}
+                        />
+                      </TouchableOpacity>
+                    </View>
+
+                    <Text style={styles.customCardPreview} numberOfLines={3}>
+                      {previewLines.join('\n')}
+                    </Text>
+
+                    <View style={styles.cardActionsRow}>
+                      <TouchableOpacity
+                        style={styles.practiceActionBtn}
+                        onPress={() => handlePracticeCustomText(item)}
+                        activeOpacity={0.8}
+                      >
+                        <Ionicons name="play" size={16} color="#FFFFFF" />
+                      <Text style={styles.practiceActionText}>{t('custom.practice')}</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={styles.editActionBtn}
+                        onPress={() => handleEditCustomText(item)}
+                        activeOpacity={0.8}
+                      >
+                        <Ionicons name="create-outline" size={16} color="#4F46E5" />
+                        <Text style={styles.editActionText}>{t('custom.edit')}</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={styles.deleteActionBtn}
+                        onPress={() => handleDeleteCustomText(item)}
+                        activeOpacity={0.8}
+                      >
+                        <Ionicons name="trash-outline" size={16} color="#EF4444" />
+                        <Text style={styles.deleteActionText}>{t('custom.delete')}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                );
+              })
+            )}
+          </View>
         ) : !activeSentence ? (
           // Empty State
           <View style={styles.emptyCard}>
@@ -474,7 +751,7 @@ export default function SpeechTracker({ initialTargetText = '' }) {
             <Text style={styles.emptyText}>
               {activeCategory === 'saved'
                 ? t('speechTracker.noSavedSentences')
-                : 'No sentences available.'}
+                : t('speechTracker.noSentences')}
             </Text>
             {activeCategory === 'saved' && (
               <TouchableOpacity
@@ -492,10 +769,26 @@ export default function SpeechTracker({ initialTargetText = '' }) {
             <View style={styles.sentenceCard}>
               {/* Top Card Info & Play Button */}
               <View style={[styles.cardTopRow, isRTL && { flexDirection: 'row-reverse' }]}>
-                <View style={styles.levelBadge}>
-                  <Text style={styles.levelBadgeText}>
-                    {getLevelLabel(activeSentence.level)}
-                  </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  <View style={styles.levelBadge}>
+                    <Text style={styles.levelBadgeText}>
+                      {getLevelLabel(activeSentence.level)}
+                    </Text>
+                  </View>
+                  {activeCategory === 'custom_practice' && (
+                    <TouchableOpacity
+                      onPress={() => {
+                        setCustomPracticeActiveText(null);
+                        setSentencesList([]);
+                        setCurrentIndex(0);
+                      }}
+                      style={styles.backToListBtn}
+                      activeOpacity={0.7}
+                    >
+                      <Ionicons name="list-outline" size={14} color="#4F46E5" style={{ marginRight: 4 }} />
+                <Text style={styles.backToListText}>{t('speechTracker.backToList')}</Text>
+                    </TouchableOpacity>
+                  )}
                 </View>
                 <TouchableOpacity
                   onPress={handleListen}
@@ -681,14 +974,10 @@ export default function SpeechTracker({ initialTargetText = '' }) {
         )}
 
         {Platform.OS === 'ios' && (
-          <Text style={styles.hint}>
-            Testez sur un iPhone réel — le simulateur ne gère pas bien le micro.
-          </Text>
+          <Text style={styles.hint}>{t('speechTracker.iosHint')}</Text>
         )}
         {Platform.OS === 'android' && (
-          <Text style={styles.hint}>
-            Testez sur un téléphone Android réel avec Google Speech installé.
-          </Text>
+          <Text style={styles.hint}>{t('speechTracker.androidHint')}</Text>
         )}
       </ScrollView>
     </View>
@@ -1058,5 +1347,209 @@ const styles = StyleSheet.create({
     color: '#94A3B8',
     textAlign: 'center',
     lineHeight: 18,
+  },
+  customPracticeContainer: {
+    width: '100%',
+    gap: 16,
+  },
+  formCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 24,
+    padding: 24,
+    shadowColor: '#4F46E5',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+    marginBottom: 8,
+  },
+  formTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#1E293B',
+    marginBottom: 16,
+  },
+  input: {
+    backgroundColor: '#F8FAFC',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    borderRadius: 14,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 14,
+    color: '#1E293B',
+    marginBottom: 12,
+    fontWeight: '500',
+  },
+  textArea: {
+    height: 100,
+    paddingTop: 12,
+  },
+  formButtonsRow: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 4,
+  },
+  saveBtn: {
+    flex: 1,
+    borderRadius: 14,
+    overflow: 'hidden',
+  },
+  saveBtnGradient: {
+    paddingVertical: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  saveBtnText: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 14,
+  },
+  cancelBtn: {
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#CBD5E1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  cancelBtnText: {
+    color: '#64748B',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    paddingHorizontal: 14,
+    height: 48,
+    shadowColor: '#4F46E5',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.03,
+    shadowRadius: 8,
+    elevation: 1,
+  },
+  searchIcon: {
+    marginRight: 10,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 14,
+    color: '#1E293B',
+    fontWeight: '500',
+    height: '100%',
+  },
+  emptyCustomCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 24,
+    padding: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#4F46E5',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.04,
+    shadowRadius: 16,
+    elevation: 2,
+    marginTop: 8,
+  },
+  customTextCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 24,
+    padding: 20,
+    shadowColor: '#4F46E5',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.05,
+    shadowRadius: 16,
+    elevation: 2,
+  },
+  cardHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  customCardTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#1E293B',
+    flex: 1,
+    marginRight: 10,
+  },
+  favoriteBtn: {
+    padding: 4,
+  },
+  customCardPreview: {
+    fontSize: 14,
+    color: '#64748B',
+    lineHeight: 20,
+    marginBottom: 16,
+    fontStyle: 'italic',
+  },
+  cardActionsRow: {
+    flexDirection: 'row',
+    gap: 8,
+    alignItems: 'center',
+  },
+  practiceActionBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#4F46E5',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 10,
+  },
+  practiceActionText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  editActionBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#EEF2FF',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 10,
+  },
+  editActionText: {
+    color: '#4F46E5',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  deleteActionBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#FEE2E2',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 10,
+    marginLeft: 'auto',
+  },
+  deleteActionText: {
+    color: '#EF4444',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  backToListBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#EEF2FF',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 10,
+  },
+  backToListText: {
+    color: '#4F46E5',
+    fontSize: 11,
+    fontWeight: '700',
   },
 });

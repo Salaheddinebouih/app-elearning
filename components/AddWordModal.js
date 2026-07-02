@@ -15,6 +15,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ARTICLE_COLORS, ARTICLES } from '../constants/articleColors';
 import { GradientButton } from './ui';
+import { useLanguage } from '../utils/LanguageContext';
 
 const STORAGE_KEY = 'words';
 
@@ -23,6 +24,7 @@ function generateId() {
 }
 
 export default function AddWordModal({ visible, onClose, onSaved }) {
+  const { t, isRTL } = useLanguage();
   const [word, setWord] = useState('');
   const [translation, setTranslation] = useState('');
   const [article, setArticle] = useState('der');
@@ -47,15 +49,15 @@ export default function AddWordModal({ visible, onClose, onSaved }) {
     const trimmedTranslation = translation.trim();
 
     if (!trimmedWord && !trimmedTranslation) {
-      setError('Please fill in the word and translation.');
+      setError(t('addWord.errorBoth'));
       return;
     }
     if (!trimmedWord) {
-      setError('Please enter a German word.');
+      setError(t('addWord.errorWord'));
       return;
     }
     if (!trimmedTranslation) {
-      setError('Please enter a translation.');
+      setError(t('addWord.errorTranslation'));
       return;
     }
 
@@ -76,7 +78,7 @@ export default function AddWordModal({ visible, onClose, onSaved }) {
       reset();
       onSaved(newEntry);
     } catch {
-      setError('Failed to save. Please try again.');
+      setError(t('addWord.errorSave'));
       setSaving(false);
     }
   };
@@ -98,10 +100,10 @@ export default function AddWordModal({ visible, onClose, onSaved }) {
               <View style={styles.sheet}>
                 <View style={styles.handle} />
 
-                <Text style={styles.title}>Add new word</Text>
+                <Text style={styles.title}>{t('addWord.modalTitle')}</Text>
 
                 {/* Article selector */}
-                <Text style={styles.fieldLabel}>Article</Text>
+                <Text style={styles.fieldLabel}>{t('addWord.articleField')}</Text>
                 <View style={styles.articleRow}>
                   {ARTICLES.map((art) => {
                     const colors = ARTICLE_COLORS[art];
@@ -131,9 +133,9 @@ export default function AddWordModal({ visible, onClose, onSaved }) {
                 </View>
 
                 {/* German word */}
-                <Text style={styles.fieldLabel}>German word</Text>
+                <Text style={styles.fieldLabel}>{t('addWord.germanField')}</Text>
                 <TextInput
-                  style={styles.input}
+                  style={[styles.input, isRTL && { textAlign: 'right' }]}
                   placeholder="e.g. Hund"
                   placeholderTextColor="#D1D5DB"
                   value={word}
@@ -143,9 +145,9 @@ export default function AddWordModal({ visible, onClose, onSaved }) {
                 />
 
                 {/* Translation */}
-                <Text style={styles.fieldLabel}>Translation</Text>
+                <Text style={styles.fieldLabel}>{t('addWord.translationField')}</Text>
                 <TextInput
-                  style={styles.input}
+                  style={[styles.input, isRTL && { textAlign: 'right' }]}
                   placeholder="e.g. the dog"
                   placeholderTextColor="#D1D5DB"
                   value={translation}
@@ -160,11 +162,11 @@ export default function AddWordModal({ visible, onClose, onSaved }) {
                 <GradientButton
                   onPress={handleSave}
                   disabled={saving}
-                  label="Save word"
+                  label={t('addWord.saveBtn')}
                 />
 
                 <TouchableOpacity style={styles.cancelButton} onPress={handleClose}>
-                  <Text style={styles.cancelText}>Cancel</Text>
+                  <Text style={styles.cancelText}>{t('addWord.cancelBtn')}</Text>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>

@@ -351,9 +351,9 @@ export default function SettingsScreen() {
           >
             <Ionicons name="warning" size={20} color="#D97706" />
             <View style={styles.permText}>
-              <Text style={styles.permTitle}>Permission denied</Text>
+              <Text style={styles.permTitle}>{t('settings.permDeniedTitle')}</Text>
               <Text style={styles.permBody}>
-                Tap here to open Settings and allow notifications.
+                {t('settings.permDeniedBody')}
               </Text>
             </View>
           </TouchableOpacity>
@@ -379,7 +379,7 @@ export default function SettingsScreen() {
                 {t('settings.dailyGoal')}
               </Text>
             </View>
-            <Text style={styles.rowValue}>{settings.dailyGoal} words</Text>
+            <Text style={styles.rowValue}>{settings.dailyGoal} {t('settings.dailyGoalValue') ? t('settings.dailyGoalValue').replace('{n}','') : 'words'}</Text>
             <Ionicons name="chevron-forward" size={16} color="#C0C0CC" />
           </TouchableOpacity>
 
@@ -399,7 +399,7 @@ export default function SettingsScreen() {
                 {t('settings.quizLength')}
               </Text>
             </View>
-            <Text style={styles.rowValue}>{settings.quizLength} questions</Text>
+            <Text style={styles.rowValue}>{settings.quizLength} {t('settings.quizLengthValue') ? t('settings.quizLengthValue').replace('{n}','') : 'questions'}</Text>
             <Ionicons name="chevron-forward" size={16} color="#C0C0CC" />
           </TouchableOpacity>
 

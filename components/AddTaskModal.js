@@ -6,10 +6,12 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { CATEGORIES, CATEGORY_META, PRIORITY_META, todayStr } from '../utils/plannerUtils';
+import { useLanguage } from '../utils/LanguageContext';
 
 const TIME_OPTIONS = [5, 10, 15, 25, 30, 45, 60];
 
 export default function AddTaskModal({ visible, task, onSave, onClose }) {
+  const { t, isRTL } = useLanguage();
   const [title,              setTitle]              = useState('');
   const [category,           setCategory]           = useState('vocabulary');
   const [priority,           setPriority]           = useState('medium');
@@ -34,9 +36,13 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
   }, [task, visible]);
 
   function handleSave() {
-    if (!title.trim()) { setError('Please enter a task title'); return; }
+    if (!title.trim()) { setError(t('addTask.errorTitle')); return; }
     onSave({ title: title.trim(), category, priority, estimatedMinutes, date: todayStr() });
   }
+
+  // Localised category and priority labels
+  const catLabel  = (cat) => t(`addTask.categories.${cat}`) || CATEGORY_META[cat]?.label;
+  const priLabel  = (pri) => t(`addTask.priorities.${pri}`) || PRIORITY_META[pri]?.label;
 
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
@@ -48,8 +54,8 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
         <View style={styles.sheet}>
           <View style={styles.handle} />
 
-          <View style={styles.header}>
-            <Text style={styles.headerTitle}>{isEditing ? 'Edit Task' : 'New Task'}</Text>
+          <View style={[styles.header, isRTL && { flexDirection: 'row-reverse' }]}>
+            <Text style={styles.headerTitle}>{isEditing ? t('addTask.editTitle') : t('addTask.newTitle')}</Text>
             <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
               <Ionicons name="close" size={18} color="#6B7280" />
             </TouchableOpacity>
@@ -57,10 +63,10 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
 
           <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
             {/* Title input */}
-            <Text style={styles.label}>TASK</Text>
+            <Text style={[styles.label, isRTL && { textAlign: 'right' }]}>{t('addTask.taskLabel')}</Text>
             <TextInput
-              style={[styles.input, !!error && styles.inputError]}
-              placeholder="e.g. Learn 10 new adjectives..."
+              style={[styles.input, !!error && styles.inputError, isRTL && { textAlign: 'right' }]}
+              placeholder={t('addTask.taskPlaceholder')}
               placeholderTextColor="#9CA3AF"
               value={title}
               onChangeText={v => { setTitle(v); setError(''); }}
@@ -70,7 +76,7 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
             {!!error && <Text style={styles.errorText}>{error}</Text>}
 
             {/* Category */}
-            <Text style={styles.label}>CATEGORY</Text>
+            <Text style={[styles.label, isRTL && { textAlign: 'right' }]}>{t('addTask.categoryLabel')}</Text>
             <View style={styles.chipRow}>
               {CATEGORIES.map(cat => {
                 const m      = CATEGORY_META[cat];
@@ -84,7 +90,7 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
                   >
                     <Ionicons name={m.icon} size={12} color={active ? m.text : '#9CA3AF'} />
                     <Text style={[styles.chipText, { color: active ? m.text : '#9CA3AF' }]}>
-                      {m.label}
+                      {catLabel(cat)}
                     </Text>
                   </TouchableOpacity>
                 );
@@ -92,7 +98,7 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
             </View>
 
             {/* Priority */}
-            <Text style={styles.label}>PRIORITY</Text>
+            <Text style={[styles.label, isRTL && { textAlign: 'right' }]}>{t('addTask.priorityLabel')}</Text>
             <View style={styles.priorityRow}>
               {['low', 'medium', 'high'].map(p => {
                 const m      = PRIORITY_META[p];
@@ -106,7 +112,7 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
                   >
                     <View style={[styles.dot, { backgroundColor: active ? m.dot : '#D1D5DB' }]} />
                     <Text style={[styles.priorityText, { color: active ? m.text : '#9CA3AF' }]}>
-                      {m.label}
+                      {priLabel(p)}
                     </Text>
                   </TouchableOpacity>
                 );
@@ -114,7 +120,7 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
             </View>
 
             {/* Estimated time */}
-            <Text style={styles.label}>ESTIMATED TIME</Text>
+            <Text style={[styles.label, isRTL && { textAlign: 'right' }]}>{t('addTask.timeLabel')}</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.timeRow}>
               {TIME_OPTIONS.map(min => {
                 const active = estimatedMinutes === min;
@@ -143,7 +149,7 @@ export default function AddTaskModal({ visible, task, onSave, onClose }) {
                 style={styles.saveBtn}
               >
                 <Ionicons name={isEditing ? 'checkmark' : 'add'} size={18} color="#FFFFFF" />
-                <Text style={styles.saveBtnText}>{isEditing ? 'Save Changes' : 'Add Task'}</Text>
+                <Text style={styles.saveBtnText}>{isEditing ? t('addTask.saveChanges') : t('addTask.addTaskBtn')}</Text>
               </LinearGradient>
             </TouchableOpacity>
 
