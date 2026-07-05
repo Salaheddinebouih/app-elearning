@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Pressable,
   ActivityIndicator,
   Platform,
   ScrollView,
@@ -26,6 +25,7 @@ import {
   updatePracticeText,
   deletePracticeText,
 } from '../services/practiceStorage';
+import RecordingAnimation from './RecordingAnimation';
 
 const ARABIC_DIACRITICS = /َ|ً|ُ|ٌ|ِ|ٍ|ْ|ّ|ـ/g;
 
@@ -904,31 +904,15 @@ export default function SpeechTracker({ initialTargetText = '' }) {
                 </View>
               )}
 
-              <Pressable
-                onPressIn={handlePressIn}
-                onPressOut={handlePressOut}
-                disabled={!voiceAvailable || (busy && !isRecording)}
-                style={({ pressed }) => [
-                  styles.recordButton,
-                  !voiceAvailable && styles.recordButtonDisabled,
-                  isRecording && styles.recordButtonActive,
-                  pressed && voiceAvailable && !isRecording && styles.recordButtonPressed,
-                ]}
-              >
-                {busy ? (
-                  <ActivityIndicator color="#FFFFFF" size="large" />
-                ) : (
-                  <Ionicons name="mic" size={40} color="#FFFFFF" />
-                )}
-              </Pressable>
-
-              <Text style={styles.statusText}>
-                {isRecording
-                  ? t('speechTracker.releaseToStop')
-                  : isProcessing
-                  ? t('speechTracker.processing')
-                  : t('speechTracker.pressToRead')}
-              </Text>
+              <RecordingAnimation
+                isRecording={isRecording}
+                isProcessing={isProcessing}
+                voiceAvailable={voiceAvailable}
+                handlePressIn={handlePressIn}
+                handlePressOut={handlePressOut}
+                language={language}
+                t={t}
+              />
 
               {error && voiceAvailable ? (
                 <View style={styles.errorBox}>
