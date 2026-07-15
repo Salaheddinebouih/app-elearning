@@ -283,6 +283,84 @@ function LearnGermanCard({ onPress }) {
   );
 }
 
+function StoriesCard({ onPress }) {
+  const { t, isRTL } = useLanguage();
+
+  return (
+    <TouchableOpacity onPress={onPress} activeOpacity={0.9} style={storiesCard.wrapper}>
+      <LinearGradient
+        colors={['#4338CA', '#7C3AED', '#EC4899']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={[storiesCard.card, isRTL && { flexDirection: 'row-reverse' }]}
+      >
+        <View style={storiesCard.iconWrap}>
+          <Ionicons name="library-outline" size={26} color="#FFFFFF" />
+        </View>
+
+        <View style={storiesCard.content}>
+          <Text style={storiesCard.eyebrow}>{t('stories.entryEyebrow')}</Text>
+          <Text style={storiesCard.title}>{t('stories.entryTitle')}</Text>
+          <Text style={storiesCard.subtitle}>{t('stories.entrySubtitle')}</Text>
+        </View>
+
+        <Ionicons name={isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color="rgba(255,255,255,0.9)" />
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+}
+
+const storiesCard = StyleSheet.create({
+  wrapper: {
+    borderRadius: 20,
+    overflow: 'hidden',
+    shadowColor: '#7C3AED',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.24,
+    shadowRadius: 16,
+    elevation: 5,
+    marginBottom: 20,
+  },
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    padding: 18,
+  },
+  iconWrap: {
+    width: 48,
+    height: 48,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.14)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.18)',
+  },
+  content: {
+    flex: 1,
+  },
+  eyebrow: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: 'rgba(255,255,255,0.7)',
+    letterSpacing: 1.4,
+    marginBottom: 4,
+    textTransform: 'uppercase',
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 4,
+  },
+  subtitle: {
+    color: 'rgba(255,255,255,0.9)',
+    fontSize: 13,
+    lineHeight: 18,
+  },
+});
+
 function SpeechPracticeCard({ onPress }) {
   const { t, isRTL } = useLanguage();
 
@@ -403,6 +481,7 @@ export default function HomeScreen() {
         <HeroCard streak={streak} onPress={() => navigation.navigate('Quiz')} />
         <StatsRow streak={streak} xp={xp} level={level} />
         <WordCard wordData={wordOfDay} />
+        <StoriesCard onPress={() => navigation.navigate('Stories')} />
         <QuizButton onPress={() => navigation.navigate('Quiz')} />
         <ScanButton onPress={() => navigation.navigate('Scan')} />
         <LearnGermanCard onPress={() => navigation.navigate('LearnGerman')} />

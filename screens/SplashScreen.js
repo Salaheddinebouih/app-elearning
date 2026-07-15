@@ -52,7 +52,7 @@ export default function SplashScreen({ navigation }) {
       <StatusBar hidden />
 
       <Animated.Image
-        source={require('../assets/alamd.jpeg')}
+        source={require('../assets/alamd_story.jpeg')}
         style={{
           width: 180,
           height: 180,

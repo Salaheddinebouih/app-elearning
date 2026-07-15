@@ -1,0 +1,73 @@
+{
+  "packId": "a1-core-pack",
+  "version": "1.0.0",
+  "language": "de",
+  "title": "A1 Core Pack",
+  "stories": [
+    {
+      "id": "story-coffee-bakery",
+      "title": "Coffee at the Bakery",
+      "subtitle": "A short stop for coffee and a morning roll.",
+      "category": "Daily Life",
+      "level": "A1",
+      "readingTime": 3,
+      "wordCount": 180,
+      "xp": 20,
+      "summary": "A simple morning story about ordering coffee, greeting the baker, and enjoying a calm start to the day.",
+      "difficulty": "Easy",
+      "coverImage": "cover-1"
+    },
+    {
+      "id": "story-missing-notebook",
+      "title": "The Missing Notebook",
+      "subtitle": "A school day mystery with simple language.",
+      "category": "School",
+      "level": "A1",
+      "readingTime": 4,
+      "wordCount": 240,
+      "xp": 25,
+      "summary": "A student looks for a notebook, asks classmates for help, and learns useful everyday classroom words.",
+      "difficulty": "Easy",
+      "coverImage": "cover-2"
+    },
+    {
+      "id": "story-market-day",
+      "title": "Saturday at the Market",
+      "subtitle": "Fresh fruit, short questions, and quick answers.",
+      "category": "Food & Shopping",
+      "level": "A2",
+      "readingTime": 5,
+      "wordCount": 320,
+      "xp": 30,
+      "summary": "A learner visits the market, compares prices, and talks about food in short natural exchanges.",
+      "difficulty": "Normal",
+      "coverImage": "cover-3"
+    },
+    {
+      "id": "story-berlin-trip",
+      "title": "A Trip to Berlin",
+      "subtitle": "Travel phrases that feel practical and real.",
+      "category": "Travel",
+      "level": "B1",
+      "readingTime": 6,
+      "wordCount": 420,
+      "xp": 40,
+      "summary": "A traveler navigates the city, asks for directions, and manages a short trip in German.",
+      "difficulty": "Challenging",
+      "coverImage": "cover-4"
+    },
+    {
+      "id": "story-sister-message",
+      "title": "A Message from My Sister",
+      "subtitle": "A more emotional story with everyday family language.",
+      "category": "Family",
+      "level": "B2",
+      "readingTime": 7,
+      "wordCount": 520,
+      "xp": 50,
+      "summary": "A reflective story about family, memories, and understanding a longer message in German.",
+      "difficulty": "Advanced",
+      "coverImage": "cover-5"
+    }
+  ]
+}

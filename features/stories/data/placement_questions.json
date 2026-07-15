@@ -1,0 +1,166 @@
+[
+  {
+    "id": "q1",
+    "type": "vocabulary",
+    "prompt": "What does \"Guten Morgen\" mean?",
+    "options": ["Good morning", "Good night", "Good afternoon", "See you later"],
+    "correctAnswer": "Good morning",
+    "explanation": "Guten Morgen is the standard German greeting for the morning."
+  },
+  {
+    "id": "q2",
+    "type": "grammar",
+    "prompt": "Which article is correct for \"Mädchen\"?",
+    "options": ["der", "die", "das", "den"],
+    "correctAnswer": "das",
+    "explanation": "Mädchen is grammatically neutral in German, so the correct article is das."
+  },
+  {
+    "id": "q3",
+    "type": "basic_german",
+    "prompt": "Choose the correct translation for \"I am learning German\".",
+    "options": ["Ich lerne Deutsch", "Ich spreche Deutsch", "Ich mag Deutsch", "Ich schreibe Deutsch"],
+    "correctAnswer": "Ich lerne Deutsch",
+    "explanation": "Lerne means I am learning."
+  },
+  {
+    "id": "q4",
+    "type": "sentence_order",
+    "prompt": "Which sentence is correct for: today / I / learn / German?",
+    "options": ["Heute lerne ich Deutsch.", "Heute ich lerne Deutsch.", "Ich heute lerne Deutsch.", "Lerne heute ich Deutsch."],
+    "correctAnswer": "Heute lerne ich Deutsch.",
+    "explanation": "In German, the verb stays in second position in a normal statement."
+  },
+  {
+    "id": "q5",
+    "type": "reading_comprehension",
+    "prompt": "Read the short text and answer the question.",
+    "passage": "Anna wakes up early. She packs her bag, drinks tea, and walks to school.",
+    "options": ["She packs her bag", "She buys a bike", "She cooks dinner", "She calls a friend"],
+    "correctAnswer": "She packs her bag",
+    "explanation": "The text says Anna packs her bag before school."
+  },
+  {
+    "id": "q6",
+    "type": "vocabulary",
+    "prompt": "What does \"Apfel\" mean?",
+    "options": ["Apple", "Bread", "Train", "Table"],
+    "correctAnswer": "Apple",
+    "explanation": "Apfel is the German word for apple."
+  },
+  {
+    "id": "q7",
+    "type": "grammar",
+    "prompt": "Which article is correct for \"Bücher\"?",
+    "options": ["der", "die", "das", "den"],
+    "correctAnswer": "die",
+    "explanation": "Plural nouns in German usually take die."
+  },
+  {
+    "id": "q8",
+    "type": "sentence_order",
+    "prompt": "Which sentence is correct for: I / go / today / to the cinema?",
+    "options": ["Ich gehe heute ins Kino.", "Ich heute gehe ins Kino.", "Gehe ich heute ins Kino.", "Heute ich gehe ins Kino."],
+    "correctAnswer": "Ich gehe heute ins Kino.",
+    "explanation": "The subject comes before the verb in a normal sentence."
+  },
+  {
+    "id": "q9",
+    "type": "basic_german",
+    "prompt": "Choose the correct German sentence for \"Where is the train station?\"",
+    "options": ["Wo ist der Bahnhof?", "Wo sind die Bahnhof?", "Wo der Bahnhof ist?", "Was ist der Bahnhof?"],
+    "correctAnswer": "Wo ist der Bahnhof?",
+    "explanation": "Wo ist der Bahnhof? is the natural way to ask where the station is."
+  },
+  {
+    "id": "q10",
+    "type": "reading_comprehension",
+    "prompt": "Read the text and answer the question.",
+    "passage": "The bakery opens at 8 a.m. Every morning, people line up to buy fresh rolls.",
+    "options": ["7 a.m.", "8 a.m.", "9 a.m.", "10 a.m."],
+    "correctAnswer": "8 a.m.",
+    "explanation": "The text clearly says the bakery opens at 8 a.m."
+  },
+  {
+    "id": "q11",
+    "type": "vocabulary",
+    "prompt": "What does \"morgen\" mean in English?",
+    "options": ["Tomorrow", "Morning", "Monday", "Later"],
+    "correctAnswer": "Tomorrow",
+    "explanation": "Morgen can mean tomorrow when used as an adverb."
+  },
+  {
+    "id": "q12",
+    "type": "grammar",
+    "prompt": "Which sentence shows correct verb-second word order?",
+    "options": ["Heute spiele ich Fußball.", "Heute ich spiele Fußball.", "Spiele heute ich Fußball.", "Ich heute spiele Fußball."],
+    "correctAnswer": "Heute spiele ich Fußball.",
+    "explanation": "After the time expression today, the conjugated verb still stays in second position."
+  },
+  {
+    "id": "q13",
+    "type": "sentence_order",
+    "prompt": "Which sentence is correct for: because I am tired / I / go / sleep / early?",
+    "options": ["Weil ich müde bin, gehe ich früh schlafen.", "Weil ich bin müde, ich gehe früh schlafen.", "Ich gehe früh schlafen, weil bin ich müde.", "Gehe ich früh schlafen, weil ich müde bin."],
+    "correctAnswer": "Weil ich müde bin, gehe ich früh schlafen.",
+    "explanation": "Subordinate clauses move the verb to the end."
+  },
+  {
+    "id": "q14",
+    "type": "basic_german",
+    "prompt": "How do you ask \"How much does that cost?\" in German?",
+    "options": ["Wie viel kostet das?", "Wie kostet viel das?", "Was kostet du?", "Wie teuer ist du?"],
+    "correctAnswer": "Wie viel kostet das?",
+    "explanation": "Wie viel kostet das? is the standard way to ask the price."
+  },
+  {
+    "id": "q15",
+    "type": "reading_comprehension",
+    "prompt": "Read the short text and answer the question.",
+    "passage": "Lena takes the train to Hamburg. She buys a ticket online and packs a small bag.",
+    "options": ["A ticket", "Bread", "A book", "Shoes"],
+    "correctAnswer": "A ticket",
+    "explanation": "The text says Lena buys a ticket online."
+  },
+  {
+    "id": "q16",
+    "type": "vocabulary",
+    "prompt": "What does \"Freund\" mean?",
+    "options": ["Friend", "Front", "Free", "Fruit"],
+    "correctAnswer": "Friend",
+    "explanation": "Freund is the masculine form of friend."
+  },
+  {
+    "id": "q17",
+    "type": "grammar",
+    "prompt": "Which article is correct for \"Tisch\"?",
+    "options": ["der", "die", "das", "den"],
+    "correctAnswer": "der",
+    "explanation": "Tisch is masculine, so the correct article is der."
+  },
+  {
+    "id": "q18",
+    "type": "sentence_order",
+    "prompt": "Which sentence is correct for: in summer / we / drive / to Berlin?",
+    "options": ["Im Sommer fahren wir nach Berlin.", "Im Sommer wir fahren nach Berlin.", "Wir im Sommer fahren nach Berlin.", "Fahren wir im Sommer nach Berlin."],
+    "correctAnswer": "Im Sommer fahren wir nach Berlin.",
+    "explanation": "The time phrase comes first and the conjugated verb follows it."
+  },
+  {
+    "id": "q19",
+    "type": "reading_comprehension",
+    "prompt": "Read the text and answer the question.",
+    "passage": "Paul practices German on a learning app every evening. He repeats the new words out loud.",
+    "options": ["On a learning app", "At school", "At the beach", "At the gym"],
+    "correctAnswer": "On a learning app",
+    "explanation": "The text says Paul practices on a learning app every evening."
+  },
+  {
+    "id": "q20",
+    "type": "basic_german",
+    "prompt": "Choose the sentence that best means: although it was raining, we went out.",
+    "options": ["Obwohl es regnete, gingen wir hinaus.", "Weil es regnete, gingen wir hinaus.", "Es regnete, aber wir bleiben drin.", "Wenn es regnete, gehen wir hinaus."],
+    "correctAnswer": "Obwohl es regnete, gingen wir hinaus.",
+    "explanation": "Obwohl means although, and the verb moves to the end of the clause."
+  }
+]

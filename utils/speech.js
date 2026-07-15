@@ -21,3 +21,33 @@ export function speakGerman(text, { onStart, onDone, onError } = {}) {
 export function stopSpeech() {
   Speech.stop();
 }
+
+export function speakGermanSequence(texts, { onStart, onDone, onError } = {}) {
+  const queue = (texts || []).map((text) => String(text || '').trim()).filter(Boolean);
+
+  if (!queue.length) {
+    if (onDone) onDone();
+    return;
+  }
+
+  Speech.stop();
+
+  const speakNext = (index) => {
+    if (index >= queue.length) {
+      if (onDone) onDone();
+      return;
+    }
+
+    Speech.speak(queue[index], {
+      language: 'de-DE',
+      pitch: 1.0,
+      rate: 0.9,
+      onStart: index === 0 ? onStart : undefined,
+      onDone: () => speakNext(index + 1),
+      onStopped: () => speakNext(index + 1),
+      onError,
+    });
+  };
+
+  speakNext(0);
+}

@@ -20,6 +20,7 @@ import LearnGermanScreen from './screens/LearnGermanScreen';
 import PlannerScreen from './screens/PlannerScreen';
 import BottomNavbar from './components/BottomNavbar';
 import SpeechTracker from './components/SpeechTracker';
+import StoriesStackNavigator from './features/stories/navigation/StoriesStackNavigator';
 import {
   loadNotificationSettings,
   scheduleNotifications,
@@ -128,6 +129,7 @@ export default function App() {
           <Stack.Screen name="AddSentence" component={AddSentenceScreen} />
           <Stack.Screen name="LearnGerman" component={LearnGermanScreen} />
           <Stack.Screen name="SpeechPractice" component={SpeechPracticeScreen} />
+          <Stack.Screen name="Stories" component={StoriesStackNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>

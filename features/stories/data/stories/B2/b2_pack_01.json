@@ -1,0 +1,376 @@
+{
+  "pack_id": "b2_pack_01",
+  "level": "B2",
+  "story_count": 3,
+  "stories": [
+    {
+      "id": "b2_001",
+      "slug": "ein_schwieriges_gesprach",
+      "title": "Ein schwieriges Gespräch",
+      "level": "B2",
+      "category": "Kommunikation",
+      "estimated_reading_time": 4,
+      "word_count": 228,
+      "xp_reward": 40,
+      "coin_reward": 18,
+      "difficulty": "advanced",
+      "summary": "Sara spricht mit ihrem Freund über eine Entscheidung, die beide Seiten ehrlich und ruhig erklären müssen.",
+      "paragraphs": [
+        {
+          "paragraph_id": "b2_1_p1",
+          "order": 1,
+          "german_text": "Sara und Jonas sitzen am Abend zusammen und merken, dass etwas zwischen ihnen nicht mehr stimmt. Beide wollen ehrlich sein, aber niemand möchte den anderen verletzen. Deshalb reden sie langsam und versuchen, genau zuzuhören.",
+          "french_translation": "Sara et Jonas sont assis ensemble le soir et remarquent que quelque chose ne va plus entre eux. Tous les deux veulent être honnêtes, mais personne ne veut blesser l'autre. Ils parlent donc lentement et essaient d'écouter attentivement.",
+          "arabic_translation": "تجلس سارة وجوناس معاً في المساء ويلاحظان أن شيئاً ما لم يعد كما كان بينهما. كلاهما يريد أن يكون صريحاً، لكن لا أحد يريد جرح الآخر. لذلك يتحدثان ببطء ويحاولان الإصغاء جيداً."
+        },
+        {
+          "paragraph_id": "b2_1_p2",
+          "order": 2,
+          "german_text": "Jonas erklärt, warum er in letzter Zeit gestresst war. Sara antwortet ruhig und sagt, dass sie sich mehr Klarheit gewünscht hätte. Am Ende einigen sie sich darauf, in den nächsten Wochen offener miteinander zu sprechen.",
+          "french_translation": "Jonas explique pourquoi il était stressé ces derniers temps. Sara répond calmement et dit qu'elle aurait souhaité plus de clarté. À la fin, ils se mettent d'accord pour parler plus ouvertement dans les semaines à venir.",
+          "arabic_translation": "يشرح جوناس لماذا كان متوتراً في الفترة الأخيرة. ترد سارة بهدوء وتقول إنها كانت تتمنى وضوحاً أكبر. في النهاية يتفقان على أن يتحدثا بصراحة أكبر في الأسابيع المقبلة."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "ehrlich",
+          "article": null,
+          "french": "honnête",
+          "arabic": "صادق",
+          "pronunciation": "AYR-likh",
+          "part_of_speech": "adjective",
+          "example_sentence": "Wir müssen ehrlich sein.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "verletzen",
+          "article": null,
+          "french": "blesser",
+          "arabic": "يجرح",
+          "pronunciation": "fer-LET-sen",
+          "part_of_speech": "verb",
+          "example_sentence": "Ich will dich nicht verletzen.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "Klarheit",
+          "article": "die",
+          "french": "clarté",
+          "arabic": "وضوح",
+          "pronunciation": "KLAR-hyt",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich wünsche mir Klarheit.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "sich einigen",
+          "article": null,
+          "french": "s'accorder",
+          "arabic": "يتفق",
+          "pronunciation": "zikh AY-ni-gen",
+          "part_of_speech": "verb phrase",
+          "example_sentence": "Sie einigen sich auf einen Plan.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "offen",
+          "article": null,
+          "french": "ouvert",
+          "arabic": "بصراحة",
+          "pronunciation": "OFF-en",
+          "part_of_speech": "adjective",
+          "example_sentence": "Wir sprechen offen miteinander.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "der Druck",
+          "article": "der",
+          "french": "la pression",
+          "arabic": "الضغط",
+          "pronunciation": "der DROOK",
+          "part_of_speech": "noun",
+          "example_sentence": "Er stand unter Druck.",
+          "difficulty": "B2"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "b2_001_q1",
+          "type": "multiple_choice",
+          "question": "Was wünschen sich beide am Ende?",
+          "options": ["Offener miteinander zu sprechen", "Zu schweigen", "Sofort umzuziehen", "Alles zu vergessen"],
+          "correct_answer": "Offener miteinander zu sprechen",
+          "explanation": "Sie einigen sich darauf, in Zukunft offener zu sprechen."
+        },
+        {
+          "id": "b2_001_q2",
+          "type": "true_false",
+          "question": "Sara möchte den anderen verletzen.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Falsch",
+          "explanation": "Beide wollen niemanden verletzen."
+        },
+        {
+          "id": "b2_001_q3",
+          "type": "fill_blank",
+          "question": "Sara wünscht sich mehr ___ .",
+          "options": ["Klarheit", "Lärm", "Hunger", "Tempo"],
+          "correct_answer": "Klarheit",
+          "explanation": "Sie sagt, dass sie sich mehr Klarheit gewünscht hätte."
+        }
+      ],
+      "rewards": {
+        "xp": 40,
+        "coins": 18,
+        "words_learned": 6,
+        "completion_badge": "badge_b2_conversation"
+      }
+    },
+    {
+      "id": "b2_002",
+      "slug": "im_umweltprojekt",
+      "title": "Im Umweltprojekt",
+      "level": "B2",
+      "category": "Umwelt",
+      "estimated_reading_time": 4,
+      "word_count": 214,
+      "xp_reward": 39,
+      "coin_reward": 18,
+      "difficulty": "advanced",
+      "summary": "Eine Gruppe organisiert ein Umweltprojekt und diskutiert praktische Lösungen für die Stadt.",
+      "paragraphs": [
+        {
+          "paragraph_id": "b2_2_p1",
+          "order": 1,
+          "german_text": "In einem Gemeindezentrum trifft sich eine Gruppe junger Leute, um ein Umweltprojekt zu planen. Sie sammeln Ideen, schreiben Aufgaben auf und sprechen über Mülltrennung, Fahrradwege und weniger Plastik.",
+          "french_translation": "Dans un centre communautaire, un groupe de jeunes se réunit pour planifier un projet environnemental. Ils recueillent des idées, notent des tâches et parlent du tri des déchets, des pistes cyclables et de la réduction du plastique.",
+          "arabic_translation": "في مركز مجتمعي يجتمع مجموعة من الشباب للتخطيط لمشروع بيئي. يجمعون الأفكار ويكتبون المهام ويتحدثون عن فرز النفايات ومسارات الدراجات وتقليل البلاستيك."
+        },
+        {
+          "paragraph_id": "b2_2_p2",
+          "order": 2,
+          "german_text": "Eine Teilnehmerin schlägt vor, Schulen besser einzubeziehen, damit die Kinder früh lernen, warum Umweltschutz wichtig ist. Am Ende erstellen sie einen Plan für Plakate, Social-Media-Beiträge und eine kleine Aktion in der Fußgängerzone.",
+          "french_translation": "Une participante propose d'impliquer davantage les écoles afin que les enfants apprennent tôt pourquoi la protection de l'environnement est importante. À la fin, ils établissent un plan pour des affiches, des publications sur les réseaux sociaux et une petite action dans la zone piétonne.",
+          "arabic_translation": "تقترح إحدى المشاركات إشراك المدارس بشكل أفضل حتى يتعلم الأطفال مبكراً لماذا حماية البيئة مهمة. في النهاية يضعون خطة لملصقات ومنشورات على وسائل التواصل وحملة صغيرة في المنطقة المخصصة للمشاة."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "die Mülltrennung",
+          "article": "die",
+          "french": "le tri des déchets",
+          "arabic": "فرز النفايات",
+          "pronunciation": "die MUEL-tren-nung",
+          "part_of_speech": "noun",
+          "example_sentence": "Mülltrennung ist wichtig.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "einbeziehen",
+          "article": null,
+          "french": "impliquer",
+          "arabic": "يشرك",
+          "pronunciation": "ayn-beh-TSEE-en",
+          "part_of_speech": "verb",
+          "example_sentence": "Wir beziehen Schulen ein.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "der Umweltschutz",
+          "article": "der",
+          "french": "la protection de l'environnement",
+          "arabic": "حماية البيئة",
+          "pronunciation": "der OOM-velt-shuts",
+          "part_of_speech": "noun",
+          "example_sentence": "Umweltschutz ist ein wichtiges Thema.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "die Fußgängerzone",
+          "article": "die",
+          "french": "la zone piétonne",
+          "arabic": "المنطقة المخصصة للمشاة",
+          "pronunciation": "die FOOS-geng-er-tsoh-ne",
+          "part_of_speech": "noun",
+          "example_sentence": "Die Aktion findet in der Fußgängerzone statt.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "vorschlagen",
+          "article": null,
+          "french": "proposer",
+          "arabic": "يقترح",
+          "pronunciation": "FOR-shlah-gen",
+          "part_of_speech": "verb",
+          "example_sentence": "Sie schlägt eine Lösung vor.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "die Veröffentlichung",
+          "article": "die",
+          "french": "la publication",
+          "arabic": "النشر",
+          "pronunciation": "die fer-OYF-fent-likh-ung",
+          "part_of_speech": "noun",
+          "example_sentence": "Die Veröffentlichung kommt morgen.",
+          "difficulty": "B2"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "b2_002_q1",
+          "type": "multiple_choice",
+          "question": "Worüber sprechen sie im Projekt?",
+          "options": ["Mülltrennung und Fahrradwege", "Nur über Musik", "Über ein neues Auto", "Über ein Spiel"],
+          "correct_answer": "Mülltrennung und Fahrradwege",
+          "explanation": "Diese Themen werden im Text genannt."
+        },
+        {
+          "id": "b2_002_q2",
+          "type": "true_false",
+          "question": "Die Gruppe plant auch Social-Media-Beiträge.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Richtig",
+          "explanation": "Das steht im zweiten Absatz."
+        },
+        {
+          "id": "b2_002_q3",
+          "type": "fill_blank",
+          "question": "Sie treffen sich in einem ___ .",
+          "options": ["Gemeindezentrum", "Hotel", "Museum", "Bahnhof"],
+          "correct_answer": "Gemeindezentrum",
+          "explanation": "Das Treffen findet im Gemeindezentrum statt."
+        }
+      ],
+      "rewards": {
+        "xp": 39,
+        "coins": 18,
+        "words_learned": 6,
+        "completion_badge": "badge_b2_environment"
+      }
+    },
+    {
+      "id": "b2_003",
+      "slug": "die_nachricht_aus_der_heimat",
+      "title": "Die Nachricht aus der Heimat",
+      "level": "B2",
+      "category": "Familie",
+      "estimated_reading_time": 4,
+      "word_count": 210,
+      "xp_reward": 38,
+      "coin_reward": 17,
+      "difficulty": "advanced",
+      "summary": "Emir liest eine Nachricht aus seiner Heimat und denkt über Sprache, Entfernung und Erinnerungen nach.",
+      "paragraphs": [
+        {
+          "paragraph_id": "b2_3_p1",
+          "order": 1,
+          "german_text": "Als Emir am Morgen sein Handy öffnet, sieht er eine lange Nachricht seiner Schwester. Sie schreibt von der Familie, vom Wetter und von einem Fest, das bald stattfindet. Emir liest alles zweimal, weil ihm die vielen kleinen Details wichtig sind.",
+          "french_translation": "Lorsque Emir ouvre son téléphone le matin, il voit un long message de sa sœur. Elle parle de la famille, du temps qu'il fait et d'une fête qui aura bientôt lieu. Emir lit tout deux fois, car les nombreux petits détails sont importants pour lui.",
+          "arabic_translation": "عندما يفتح أمير هاتفه صباحاً يرى رسالة طويلة من أخته. تكتب عن العائلة والطقس وعن احتفال سيقام قريباً. يقرأ أمير كل شيء مرتين لأن التفاصيل الصغيرة مهمة بالنسبة له."
+        },
+        {
+          "paragraph_id": "b2_3_p2",
+          "order": 2,
+          "german_text": "Er antwortet später ausführlich und erzählt, dass er sich an manche Orte kaum noch erinnern kann, obwohl er sie früher jeden Tag gesehen hat. Die Nachricht macht ihn froh und ein bisschen melancholisch zugleich.",
+          "french_translation": "Il répond plus tard en détail et raconte qu'il se souvient à peine de certains endroits, même s'il les voyait autrefois tous les jours. Le message le rend heureux et un peu mélancolique à la fois.",
+          "arabic_translation": "يرد لاحقاً بتفصيل ويخبرها أنه بالكاد يتذكر بعض الأماكن رغم أنه كان يراها يومياً في السابق. تجعل الرسالةُه سعيداً ومتحسراً قليلاً في الوقت نفسه."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "die Heimat",
+          "article": "die",
+          "french": "le pays natal",
+          "arabic": "الوطن",
+          "pronunciation": "die HAY-maht",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich vermisse meine Heimat.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "ausführlich",
+          "article": null,
+          "french": "en détail",
+          "arabic": "بالتفصيل",
+          "pronunciation": "ous-FOOR-likh",
+          "part_of_speech": "adverb",
+          "example_sentence": "Er antwortet ausführlich.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "sich erinnern",
+          "article": null,
+          "french": "se souvenir",
+          "arabic": "يتذكر",
+          "pronunciation": "zikh er-IN-nern",
+          "part_of_speech": "verb phrase",
+          "example_sentence": "Ich erinnere mich an die Orte.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "mélancholisch",
+          "article": null,
+          "french": "mélancolique",
+          "arabic": "حنين / متحسر",
+          "pronunciation": "me-lan-KO-lish",
+          "part_of_speech": "adjective",
+          "example_sentence": "Das macht ihn melancholisch.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "das Fest",
+          "article": "das",
+          "french": "la fête",
+          "arabic": "الاحتفال",
+          "pronunciation": "das FESHT",
+          "part_of_speech": "noun",
+          "example_sentence": "Das Fest findet bald statt.",
+          "difficulty": "B2"
+        },
+        {
+          "german": "die Entfernung",
+          "article": "die",
+          "french": "la distance",
+          "arabic": "المسافة",
+          "pronunciation": "die ent-FERN-ung",
+          "part_of_speech": "noun",
+          "example_sentence": "Die Entfernung ist groß.",
+          "difficulty": "B2"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "b2_003_q1",
+          "type": "multiple_choice",
+          "question": "Was schreibt die Schwester?",
+          "options": ["Von der Familie und einem Fest", "Von einem Zugticket", "Von der Arbeit im Büro", "Von einer Klassenfahrt"],
+          "correct_answer": "Von der Familie und einem Fest",
+          "explanation": "Das steht im ersten Absatz."
+        },
+        {
+          "id": "b2_003_q2",
+          "type": "true_false",
+          "question": "Emir erinnert sich an alle Orte sofort ganz genau.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Falsch",
+          "explanation": "Er erinnert sich an manche Orte kaum noch."
+        },
+        {
+          "id": "b2_003_q3",
+          "type": "fill_blank",
+          "question": "Die Nachricht macht Emir froh und ein bisschen ___.",
+          "options": ["melancholisch", "laut", "schnell", "hungrig"],
+          "correct_answer": "melancholisch",
+          "explanation": "Das ist die Formulierung im zweiten Absatz."
+        }
+      ],
+      "rewards": {
+        "xp": 38,
+        "coins": 17,
+        "words_learned": 6,
+        "completion_badge": "badge_b2_family"
+      }
+    }
+  ]
+}

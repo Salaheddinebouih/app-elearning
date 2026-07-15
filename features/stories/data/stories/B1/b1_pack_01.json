@@ -1,0 +1,376 @@
+{
+  "pack_id": "b1_pack_01",
+  "level": "B1",
+  "story_count": 3,
+  "stories": [
+    {
+      "id": "b1_001",
+      "slug": "ein_neuer_arbeitsplatz",
+      "title": "Ein neuer Arbeitsplatz",
+      "level": "B1",
+      "category": "Arbeit",
+      "estimated_reading_time": 3,
+      "word_count": 198,
+      "xp_reward": 34,
+      "coin_reward": 16,
+      "difficulty": "intermediate",
+      "summary": "Mina beginnt einen neuen Job und lernt ihr Team, ihre Aufgaben und den Tagesablauf kennen.",
+      "paragraphs": [
+        {
+          "paragraph_id": "b1_1_p1",
+          "order": 1,
+          "german_text": "Am Montag beginnt Mina in einer kleinen Firma zu arbeiten. Sie ist ein bisschen nervös, aber auch neugierig. Ihre Kollegin zeigt ihr den Schreibtisch, erklärt die wichtigsten Programme und stellt sie dem Team vor.",
+          "french_translation": "Lundi, Mina commence à travailler dans une petite entreprise. Elle est un peu nerveuse, mais aussi curieuse. Sa collègue lui montre le bureau, explique les programmes les plus importants et la présente à l'équipe.",
+          "arabic_translation": "تبدأ مينا العمل يوم الاثنين في شركة صغيرة. هي متوترة قليلاً لكنها فضولية أيضاً. تعرض لها زميلتها المكتب وتشرح البرامج المهمة وتقدمها للفريق."
+        },
+        {
+          "paragraph_id": "b1_1_p2",
+          "order": 2,
+          "german_text": "Später bekommt Mina ihre ersten Aufgaben. Sie beantwortet E-Mails, organisiert Termine und macht sich Notizen. Am Nachmittag merkt sie, dass sie schon mehr versteht, als sie am Morgen gedacht hat.",
+          "french_translation": "Plus tard, Mina reçoit ses premières tâches. Elle répond aux e-mails, organise les rendez-vous et prend des notes. L'après-midi, elle remarque qu'elle comprend déjà plus de choses qu'elle ne le pensait le matin.",
+          "arabic_translation": "لاحقاً تتلقى مينا مهامها الأولى. ترد على الرسائل الإلكترونية وتنظم المواعيد وتدوّن الملاحظات. في فترة بعد الظهر تلاحظ أنها فهمت أكثر مما كانت تظن صباحاً."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "die Firma",
+          "article": "die",
+          "french": "l'entreprise",
+          "arabic": "الشركة",
+          "pronunciation": "die FIR-ma",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich arbeite in einer Firma.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "neugierig",
+          "article": null,
+          "french": "curieux",
+          "arabic": "فضولي",
+          "pronunciation": "NOY-ge-rikh",
+          "part_of_speech": "adjective",
+          "example_sentence": "Mina ist neugierig.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "erklären",
+          "article": null,
+          "french": "expliquer",
+          "arabic": "يشرح",
+          "pronunciation": "er-KLAY-ren",
+          "part_of_speech": "verb",
+          "example_sentence": "Die Kollegin erklärt das Programm.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "der Termin",
+          "article": "der",
+          "french": "le rendez-vous",
+          "arabic": "الموعد",
+          "pronunciation": "der ter-MEEN",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich habe einen Termin.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "notieren",
+          "article": null,
+          "french": "noter",
+          "arabic": "يدوّن",
+          "pronunciation": "no-TYE-ren",
+          "part_of_speech": "verb",
+          "example_sentence": "Ich notiere die Aufgaben.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "verstehen",
+          "article": null,
+          "french": "comprendre",
+          "arabic": "يفهم",
+          "pronunciation": "fer-SHTEH-en",
+          "part_of_speech": "verb",
+          "example_sentence": "Ich verstehe das jetzt besser.",
+          "difficulty": "B1"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "b1_001_q1",
+          "type": "multiple_choice",
+          "question": "Woran merkt Mina am Nachmittag etwas?",
+          "options": ["Dass sie mehr versteht", "Dass sie krank ist", "Dass sie Urlaub hat", "Dass das Büro leer ist"],
+          "correct_answer": "Dass sie mehr versteht",
+          "explanation": "Sie merkt, dass sie schon mehr versteht als am Morgen."
+        },
+        {
+          "id": "b1_001_q2",
+          "type": "true_false",
+          "question": "Mina ist am Anfang völlig entspannt.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Falsch",
+          "explanation": "Sie ist ein bisschen nervös."
+        },
+        {
+          "id": "b1_001_q3",
+          "type": "fill_blank",
+          "question": "Sie beantwortet ___ und organisiert Termine.",
+          "options": ["E-Mails", "Bücher", "Karten", "Pakete"],
+          "correct_answer": "E-Mails",
+          "explanation": "Im Text beantwortet sie E-Mails."
+        }
+      ],
+      "rewards": {
+        "xp": 34,
+        "coins": 16,
+        "words_learned": 6,
+        "completion_badge": "badge_b1_job"
+      }
+    },
+    {
+      "id": "b1_002",
+      "slug": "am_bahnhof",
+      "title": "Am Bahnhof",
+      "level": "B1",
+      "category": "Reisen",
+      "estimated_reading_time": 3,
+      "word_count": 184,
+      "xp_reward": 32,
+      "coin_reward": 15,
+      "difficulty": "intermediate",
+      "summary": "Paul muss am Bahnhof schnell reagieren, ein Ticket ändern und eine neue Verbindung finden.",
+      "paragraphs": [
+        {
+          "paragraph_id": "b1_2_p1",
+          "order": 1,
+          "german_text": "Paul kommt am Bahnhof an und sieht sofort die Anzeigetafel. Sein Zug hat Verspätung. Er geht zum Schalter und fragt freundlich, ob es noch eine andere Verbindung gibt.",
+          "french_translation": "Paul arrive à la gare et voit tout de suite le tableau d'affichage. Son train a du retard. Il va au guichet et demande poliment s'il existe une autre correspondance.",
+          "arabic_translation": "يصل بول إلى المحطة ويرى لوحة المواعيد فوراً. قطاره متأخر. يذهب إلى الشباك ويسأل بأدب إن كانت هناك رحلة أخرى."
+        },
+        {
+          "paragraph_id": "b1_2_p2",
+          "order": 2,
+          "german_text": "Die Mitarbeiterin hilft ihm und druckt ein neues Ticket aus. Paul bedankt sich und wartet in der Halle. Dort hört er Lautsprecherdurchsagen und achtet auf die Gleisnummer.",
+          "french_translation": "La employée l'aide et imprime un nouveau billet. Paul la remercie et attend dans le hall. Il y entend des annonces et fait attention au numéro du quai.",
+          "arabic_translation": "تساعده الموظفة وتطبع تذكرة جديدة. يشكرها بول وينتظر في القاعة. يسمع هناك الإعلانات ويلاحظ رقم الرصيف."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "die Anzeigetafel",
+          "article": "die",
+          "french": "le tableau d'affichage",
+          "arabic": "لوحة المواعيد",
+          "pronunciation": "die AN-tsay-ge-tahl-fel",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich schaue auf die Anzeigetafel.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "die Verspätung",
+          "article": "die",
+          "french": "le retard",
+          "arabic": "التأخير",
+          "pronunciation": "die fer-SHPAE-tung",
+          "part_of_speech": "noun",
+          "example_sentence": "Der Zug hat Verspätung.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "die Verbindung",
+          "article": "die",
+          "french": "la correspondance",
+          "arabic": "الرحلة/الوصل",
+          "pronunciation": "die fer-BIN-dung",
+          "part_of_speech": "noun",
+          "example_sentence": "Es gibt eine neue Verbindung.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "der Schalter",
+          "article": "der",
+          "french": "le guichet",
+          "arabic": "الشباك",
+          "pronunciation": "der SHAL-ter",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich gehe zum Schalter.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "die Durchsage",
+          "article": "die",
+          "french": "l'annonce",
+          "arabic": "الإعلان",
+          "pronunciation": "die DURKH-zah-ge",
+          "part_of_speech": "noun",
+          "example_sentence": "Die Durchsage ist wichtig.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "das Gleis",
+          "article": "das",
+          "french": "le quai",
+          "arabic": "الرصيف",
+          "pronunciation": "das GLYS",
+          "part_of_speech": "noun",
+          "example_sentence": "Der Zug fährt von Gleis 3 ab.",
+          "difficulty": "B1"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "b1_002_q1",
+          "type": "multiple_choice",
+          "question": "Was macht Paul am Schalter?",
+          "options": ["Er fragt nach einer anderen Verbindung", "Er kauft ein Eis", "Er ruft seine Mutter an", "Er verliert sein Ticket"],
+          "correct_answer": "Er fragt nach einer anderen Verbindung",
+          "explanation": "Das steht direkt im Text."
+        },
+        {
+          "id": "b1_002_q2",
+          "type": "true_false",
+          "question": "Paul wartet in der Halle.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Richtig",
+          "explanation": "Er wartet in der Halle, nachdem er das neue Ticket bekommen hat."
+        },
+        {
+          "id": "b1_002_q3",
+          "type": "fill_blank",
+          "question": "Paul achtet auf die ___ .",
+          "options": ["Gleisnummer", "Schulnoten", "Wettervorhersage", "Hotelbuchung"],
+          "correct_answer": "Gleisnummer",
+          "explanation": "Er achtet auf die Gleisnummer."
+        }
+      ],
+      "rewards": {
+        "xp": 32,
+        "coins": 15,
+        "words_learned": 6,
+        "completion_badge": "badge_b1_station"
+      }
+    },
+    {
+      "id": "b1_003",
+      "slug": "der_arzttermin",
+      "title": "Der Arzttermin",
+      "level": "B1",
+      "category": "Gesundheit",
+      "estimated_reading_time": 3,
+      "word_count": 176,
+      "xp_reward": 33,
+      "coin_reward": 15,
+      "difficulty": "intermediate",
+      "summary": "Lea besucht die Arztpraxis, beschreibt ihre Symptome und bekommt Ratschläge für den Alltag.",
+      "paragraphs": [
+        {
+          "paragraph_id": "b1_3_p1",
+          "order": 1,
+          "german_text": "Lea hat seit zwei Tagen Halsschmerzen und fühlt sich müde. Deshalb macht sie einen Termin bei ihrer Ärztin. In der Praxis beschreibt sie genau, wie lange die Beschwerden schon dauern.",
+          "french_translation": "Depuis deux jours, Lea a mal à la gorge et se sent fatiguée. Elle prend donc rendez-vous chez son médecin. Au cabinet, elle décrit précisément depuis combien de temps les symptômes durent.",
+          "arabic_translation": "لدى ليا ألم في الحلق منذ يومين وتشعر بالتعب. لذلك حجزت موعداً لدى الطبيبة. في العيادة تصف بدقة منذ متى بدأت الأعراض."
+        },
+        {
+          "paragraph_id": "b1_3_p2",
+          "order": 2,
+          "german_text": "Die Ärztin hört zu, untersucht Lea und gibt ihr Tipps: viel trinken, sich ausruhen und nicht zu viel sprechen. Lea verlässt die Praxis erleichtert und möchte zu Hause früh schlafen.",
+          "french_translation": "La médecin l'écoute, l'examine et lui donne des conseils : boire beaucoup, se reposer et ne pas trop parler. Lea quitte le cabinet soulagée et veut se coucher tôt à la maison.",
+          "arabic_translation": "تستمع الطبيبة إليها وتفحص ليا وتعطيها نصائح: شرب الكثير من الماء، الراحة وعدم التحدث كثيراً. تغادر ليا العيادة مرتاحة وتريد أن تنام مبكراً في المنزل."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "die Halsschmerzen",
+          "article": null,
+          "french": "mal de gorge",
+          "arabic": "ألم الحلق",
+          "pronunciation": "die HALS-shmer-tsen",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich habe Halsschmerzen.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "die Beschwerden",
+          "article": null,
+          "french": "les symptômes / les douleurs",
+          "arabic": "الأعراض",
+          "pronunciation": "die be-SHER-den",
+          "part_of_speech": "noun",
+          "example_sentence": "Die Beschwerden dauern an.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "die Praxis",
+          "article": "die",
+          "french": "le cabinet",
+          "arabic": "العيادة",
+          "pronunciation": "die PRAK-sis",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich gehe in die Praxis.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "untersuchen",
+          "article": null,
+          "french": "examiner",
+          "arabic": "يفحص",
+          "pronunciation": "un-ter-ZOO-khen",
+          "part_of_speech": "verb",
+          "example_sentence": "Die Ärztin untersucht Lea.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "sich ausruhen",
+          "article": null,
+          "french": "se reposer",
+          "arabic": "يرتاح",
+          "pronunciation": "zikh OUS-roo-en",
+          "part_of_speech": "verb phrase",
+          "example_sentence": "Du solltest dich ausruhen.",
+          "difficulty": "B1"
+        },
+        {
+          "german": "erleichtert",
+          "article": null,
+          "french": "soulagé",
+          "arabic": "مرتاح",
+          "pronunciation": "er-LAYKH-tert",
+          "part_of_speech": "adjective",
+          "example_sentence": "Lea ist erleichtert.",
+          "difficulty": "B1"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "b1_003_q1",
+          "type": "multiple_choice",
+          "question": "Warum macht Lea einen Termin?",
+          "options": ["Weil sie Halsschmerzen hat", "Weil sie Ferien hat", "Weil sie reisen will", "Weil sie ein neues Handy braucht"],
+          "correct_answer": "Weil sie Halsschmerzen hat",
+          "explanation": "Das steht im ersten Absatz."
+        },
+        {
+          "id": "b1_003_q2",
+          "type": "true_false",
+          "question": "Die Ärztin rät Lea, viel zu sprechen.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Falsch",
+          "explanation": "Sie soll nicht zu viel sprechen."
+        },
+        {
+          "id": "b1_003_q3",
+          "type": "fill_blank",
+          "question": "Lea möchte zu Hause früh ___.",
+          "options": ["schlafen", "arbeiten", "fahren", "schreiben"],
+          "correct_answer": "schlafen",
+          "explanation": "Sie möchte früh schlafen."
+        }
+      ],
+      "rewards": {
+        "xp": 33,
+        "coins": 15,
+        "words_learned": 6,
+        "completion_badge": "badge_b1_doctor"
+      }
+    }
+  ]
+}

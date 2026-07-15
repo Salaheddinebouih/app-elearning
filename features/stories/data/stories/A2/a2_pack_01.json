@@ -1,0 +1,376 @@
+{
+  "pack_id": "a2_pack_01",
+  "level": "A2",
+  "story_count": 3,
+  "stories": [
+    {
+      "id": "a2_001",
+      "slug": "im_supermarkt",
+      "title": "Im Supermarkt",
+      "level": "A2",
+      "category": "Alltag",
+      "estimated_reading_time": 2,
+      "word_count": 148,
+      "xp_reward": 26,
+      "coin_reward": 12,
+      "difficulty": "intermediate",
+      "summary": "Nina kauft nach der Arbeit im Supermarkt ein und vergleicht Preise, Mengen und Angebote.",
+      "paragraphs": [
+        {
+          "paragraph_id": "a2_1_p1",
+          "order": 1,
+          "german_text": "Nach der Arbeit geht Nina in den Supermarkt. Sie hat eine Liste in der Hand. Heute braucht sie Brot, Obst, Joghurt und Tee. Im Laden ist es voll, aber Nina bleibt ruhig und sucht die Produkte nacheinander.",
+          "french_translation": "Après le travail, Nina va au supermarché. Elle a une liste à la main. Aujourd'hui, elle a besoin de pain, de fruits, de yaourt et de thé. Le magasin est plein, mais Nina reste calme et cherche les produits un par un.",
+          "arabic_translation": "بعد العمل تذهب نينا إلى السوبرماركت. معها قائمة في يدها. تحتاج اليوم إلى خبز وفاكهة ولبن وشاي. المتجر مزدحم، لكن نينا تبقى هادئة وتبحث عن المنتجات واحدةً تلو الأخرى."
+        },
+        {
+          "paragraph_id": "a2_1_p2",
+          "order": 2,
+          "german_text": "An der Kasse fragt die Verkäuferin: 'Möchten Sie eine Tasche?' Nina sagt: 'Ja, bitte.' Sie bezahlt mit Karte und lächelt, weil sie alles gefunden hat, was sie brauchte.",
+          "french_translation": "À la caisse, la vendeuse demande : « Voulez-vous un sac ? » Nina dit : « Oui, s'il vous plaît. » Elle paie par carte et sourit parce qu'elle a trouvé tout ce dont elle avait besoin.",
+          "arabic_translation": "عند الصندوق تسأل البائعة: 'هل تريدين حقيبة؟' تقول نينا: 'نعم من فضلك.' تدفع بالبطاقة وتبتسم لأنها وجدت كل ما تحتاجه."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "der Supermarkt",
+          "article": "der",
+          "french": "le supermarché",
+          "arabic": "السوبرماركت",
+          "pronunciation": "der ZOO-per-markt",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich gehe in den Supermarkt.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "die Liste",
+          "article": "die",
+          "french": "la liste",
+          "arabic": "القائمة",
+          "pronunciation": "die LIS-te",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich schreibe eine Liste.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "das Obst",
+          "article": "das",
+          "french": "les fruits",
+          "arabic": "الفاكهة",
+          "pronunciation": "das O-bst",
+          "part_of_speech": "noun",
+          "example_sentence": "Das Obst ist frisch.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "bezahlen",
+          "article": null,
+          "french": "payer",
+          "arabic": "يدفع",
+          "pronunciation": "be-TSAH-len",
+          "part_of_speech": "verb",
+          "example_sentence": "Ich bezahle an der Kasse.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "vergleichen",
+          "article": null,
+          "french": "comparer",
+          "arabic": "يقارن",
+          "pronunciation": "fer-GLAY-khen",
+          "part_of_speech": "verb",
+          "example_sentence": "Sie vergleicht die Preise.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "die Kasse",
+          "article": "die",
+          "french": "la caisse",
+          "arabic": "الصندوق",
+          "pronunciation": "die KAS-se",
+          "part_of_speech": "noun",
+          "example_sentence": "An der Kasse bezahle ich.",
+          "difficulty": "A2"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "a2_001_q1",
+          "type": "multiple_choice",
+          "question": "Was braucht Nina heute?",
+          "options": ["Brot, Obst, Joghurt und Tee", "Regen, Schuhe und Bücher", "Kaffee, Kuchen und Milch", "Zug, Ticket und Tasche"],
+          "correct_answer": "Brot, Obst, Joghurt und Tee",
+          "explanation": "Im Text steht, dass Nina Brot, Obst, Joghurt und Tee braucht."
+        },
+        {
+          "id": "a2_001_q2",
+          "type": "true_false",
+          "question": "Nina bezahlt bar.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Falsch",
+          "explanation": "Sie bezahlt mit Karte."
+        },
+        {
+          "id": "a2_001_q3",
+          "type": "fill_blank",
+          "question": "An der ___ fragt die Verkäuferin nach einer Tasche.",
+          "options": ["Kasse", "Schule", "Straße", "Bibliothek"],
+          "correct_answer": "Kasse",
+          "explanation": "Die Szene spielt an der Kasse."
+        }
+      ],
+      "rewards": {
+        "xp": 26,
+        "coins": 12,
+        "words_learned": 6,
+        "completion_badge": "badge_a2_supermarkt"
+      }
+    },
+    {
+      "id": "a2_002",
+      "slug": "mit_dem_bus",
+      "title": "Mit dem Bus nach Hause",
+      "level": "A2",
+      "category": "Transport",
+      "estimated_reading_time": 2,
+      "word_count": 136,
+      "xp_reward": 24,
+      "coin_reward": 11,
+      "difficulty": "intermediate",
+      "summary": "Tom verpasst fast seinen Bus, fragt nach der Haltestelle und spricht über den Fahrplan.",
+      "paragraphs": [
+        {
+          "paragraph_id": "a2_2_p1",
+          "order": 1,
+          "german_text": "Tom kommt aus der Schule und sieht auf die Uhr. Er muss schnell zum Bus laufen. An der Haltestelle warten schon mehrere Leute. Tom liest den Fahrplan und schaut, wann der nächste Bus kommt.",
+          "french_translation": "Tom sort de l'école et regarde l'heure. Il doit courir jusqu'au bus. À l'arrêt, plusieurs personnes attendent déjà. Tom lit l'horaire et regarde quand le prochain bus arrive.",
+          "arabic_translation": "يخرج توم من المدرسة وينظر إلى الساعة. عليه أن يركض بسرعة إلى الحافلة. عند الموقف ينتظر عدة أشخاص. يقرأ توم الجدول وينظر متى تصل الحافلة التالية."
+        },
+        {
+          "paragraph_id": "a2_2_p2",
+          "order": 2,
+          "german_text": "Eine Frau fragt: 'Fährt dieser Bus zum Zentrum?' Tom hört zu. Der Bus kommt pünktlich, und alle steigen ein. Auf dem Weg nach Hause sieht Tom viele bekannte Straßen.",
+          "french_translation": "Une femme demande : « Ce bus va-t-il au centre ? » Tom écoute. Le bus arrive à l'heure et tout le monde monte. Sur le chemin du retour, Tom voit de nombreuses rues qu'il connaît.",
+          "arabic_translation": "تسأل امرأة: 'هل تذهب هذه الحافلة إلى المركز؟' يستمع توم. تصل الحافلة في الوقت المحدد ويصعد الجميع. في الطريق إلى المنزل يرى توم شوارع كثيرة يعرفها."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "die Haltestelle",
+          "article": "die",
+          "french": "l'arrêt",
+          "arabic": "الموقف",
+          "pronunciation": "die HAL-te-shtel-le",
+          "part_of_speech": "noun",
+          "example_sentence": "Ich warte an der Haltestelle.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "der Fahrplan",
+          "article": "der",
+          "french": "l'horaire",
+          "arabic": "الجدول",
+          "pronunciation": "der FARE-plan",
+          "part_of_speech": "noun",
+          "example_sentence": "Der Fahrplan ist online.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "pünktlich",
+          "article": null,
+          "french": "à l'heure",
+          "arabic": "في الوقت المحدد",
+          "pronunciation": "PUENKT-likh",
+          "part_of_speech": "adjective",
+          "example_sentence": "Der Bus ist pünktlich.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "steigen ein",
+          "article": null,
+          "french": "monter",
+          "arabic": "يصعد",
+          "pronunciation": "SHTY-gen ayn",
+          "part_of_speech": "verb phrase",
+          "example_sentence": "Wir steigen in den Bus ein.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "das Zentrum",
+          "article": "das",
+          "french": "le centre",
+          "arabic": "المركز",
+          "pronunciation": "das TSEN-trum",
+          "part_of_speech": "noun",
+          "example_sentence": "Der Bus fährt zum Zentrum.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "bekannt",
+          "article": null,
+          "french": "connu",
+          "arabic": "معروف",
+          "pronunciation": "be-KANT",
+          "part_of_speech": "adjective",
+          "example_sentence": "Die Straßen sind bekannt.",
+          "difficulty": "A2"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "a2_002_q1",
+          "type": "multiple_choice",
+          "question": "Wohin fährt der Bus?",
+          "options": ["Zum Zentrum", "Zum Flughafen", "Zur Uni", "Zur Brücke"],
+          "correct_answer": "Zum Zentrum",
+          "explanation": "Die Frau fragt, ob der Bus zum Zentrum fährt."
+        },
+        {
+          "id": "a2_002_q2",
+          "type": "true_false",
+          "question": "Tom liest den Fahrplan.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Richtig",
+          "explanation": "Tom schaut auf den Fahrplan."
+        },
+        {
+          "id": "a2_002_q3",
+          "type": "fill_blank",
+          "question": "Der Bus kommt ___ an.",
+          "options": ["pünktlich", "langsam", "spät", "leer"],
+          "correct_answer": "pünktlich",
+          "explanation": "Im Text heißt es, dass der Bus pünktlich kommt."
+        }
+      ],
+      "rewards": {
+        "xp": 24,
+        "coins": 11,
+        "words_learned": 6,
+        "completion_badge": "badge_a2_bus"
+      }
+    },
+    {
+      "id": "a2_003",
+      "slug": "nachmittag_im_park",
+      "title": "Ein Nachmittag im Park",
+      "level": "A2",
+      "category": "Freizeit",
+      "estimated_reading_time": 2,
+      "word_count": 142,
+      "xp_reward": 25,
+      "coin_reward": 11,
+      "difficulty": "intermediate",
+      "summary": "Sara trifft eine Freundin im Park, macht ein Picknick und spricht über ihre Pläne.",
+      "paragraphs": [
+        {
+          "paragraph_id": "a2_3_p1",
+          "order": 1,
+          "german_text": "Sara trifft sich am Samstag mit ihrer Freundin im Park. Sie bringen eine Decke, Obst und Sandwiches mit. Das Wetter ist schön, deshalb setzen sie sich unter einen Baum und entspannen sich.",
+          "french_translation": "Sara retrouve son amie au parc samedi. Elles apportent une couverture, des fruits et des sandwichs. Il fait beau, alors elles s'assoient sous un arbre et se détendent.",
+          "arabic_translation": "تلتقي سارة بصديقتها في الحديقة يوم السبت. تحضران بطانية وفاكهة وساندويتشات. الطقس جميل، لذلك تجلسان تحت شجرة وتسترخيان."
+        },
+        {
+          "paragraph_id": "a2_3_p2",
+          "order": 2,
+          "german_text": "Später gehen sie spazieren und sprechen über die Woche. Sara erzählt von ihrem Kurs, und ihre Freundin hört aufmerksam zu. Am Ende machen sie Fotos und lachen viel.",
+          "french_translation": "Plus tard, elles se promènent et parlent de la semaine. Sara raconte son cours et son amie écoute attentivement. À la fin, elles prennent des photos et rient beaucoup.",
+          "arabic_translation": "لاحقاً تمشيان ويتحدثان عن الأسبوع. تخبر سارة عن دورتها وتستمع صديقتها باهتمام. في النهاية تلتقطان صوراً وتضحكان كثيراً."
+        }
+      ],
+      "vocabulary": [
+        {
+          "german": "die Decke",
+          "article": "die",
+          "french": "la couverture",
+          "arabic": "البطانية",
+          "pronunciation": "die DEK-ke",
+          "part_of_speech": "noun",
+          "example_sentence": "Wir bringen eine Decke mit.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "spazieren gehen",
+          "article": null,
+          "french": "se promener",
+          "arabic": "يمشي للتنزه",
+          "pronunciation": "shpa-TSEE-ren GAY-en",
+          "part_of_speech": "verb phrase",
+          "example_sentence": "Wir gehen im Park spazieren.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "aufmerksam",
+          "article": null,
+          "french": "attentif",
+          "arabic": "باهتمام",
+          "pronunciation": "OAF-merk-sam",
+          "part_of_speech": "adjective",
+          "example_sentence": "Sie hört aufmerksam zu.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "das Picknick",
+          "article": "das",
+          "french": "le pique-nique",
+          "arabic": "النزهة",
+          "pronunciation": "das PIK-nik",
+          "part_of_speech": "noun",
+          "example_sentence": "Wir machen ein Picknick.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "entspannen",
+          "article": null,
+          "french": "se détendre",
+          "arabic": "يسترخي",
+          "pronunciation": "ent-SHPAH-nen",
+          "part_of_speech": "verb",
+          "example_sentence": "Im Park entspannen wir uns.",
+          "difficulty": "A2"
+        },
+        {
+          "german": "die Woche",
+          "article": "die",
+          "french": "la semaine",
+          "arabic": "الأسبوع",
+          "pronunciation": "die VOH-khe",
+          "part_of_speech": "noun",
+          "example_sentence": "Wie war deine Woche?",
+          "difficulty": "A2"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "a2_003_q1",
+          "type": "multiple_choice",
+          "question": "Was nehmen Sara und ihre Freundin mit?",
+          "options": ["Eine Decke, Obst und Sandwiches", "Nur Bücher", "Ein Fahrrad und Schuhe", "Ein Radio und Wasser"],
+          "correct_answer": "Eine Decke, Obst und Sandwiches",
+          "explanation": "Das steht im ersten Absatz."
+        },
+        {
+          "id": "a2_003_q2",
+          "type": "true_false",
+          "question": "Sara und ihre Freundin bleiben die ganze Zeit sitzen.",
+          "options": ["Richtig", "Falsch"],
+          "correct_answer": "Falsch",
+          "explanation": "Sie gehen später spazieren."
+        },
+        {
+          "id": "a2_003_q3",
+          "type": "fill_blank",
+          "question": "Am Ende machen sie ___ und lachen viel.",
+          "options": ["Fotos", "Hausaufgaben", "Einkäufe", "Pläne"],
+          "correct_answer": "Fotos",
+          "explanation": "Im Text steht, dass sie Fotos machen."
+        }
+      ],
+      "rewards": {
+        "xp": 25,
+        "coins": 11,
+        "words_learned": 6,
+        "completion_badge": "badge_a2_park"
+      }
+    }
+  ]
+}
